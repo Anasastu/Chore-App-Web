@@ -23,7 +23,7 @@
 
 -->
 <body>
-	<div id="nav-bar">
+	<div id="navbar">
 		<!-- 
 			I would like a global navigation/header section here. 
 			
@@ -89,7 +89,7 @@
 		<h4 id="choreSelectionTitle"></h4>
 		<p>Please select all the chores that need to get done below.<br>If you dont find them in the list, write them in!</p>
 		<form id="choreSelectionForm" class="">
-			<select name="" size="20" multiple>
+			<select id="choreSelectionList" name="" size="20">
 			  	<option value="washDishes">Wash Dishes</option>
 			  	<option value="vacuum">Vacuum</option>
 			  	<option value="cleanBathroom">Clean Bathroom</option>
@@ -119,9 +119,13 @@
 					are added via the custom chore add go here!
 			-->
 			<h5>Chores You Selected Go Here!</h5>
-			<ul id="preChoreList">
-				<li><a href='#'>-</a>somechore</li>
-			</ul>
+			<div id="preChoreListSection">
+				<form id="preChoreListForm">
+					<select id="userSelectedChores" name="" size="20">
+					</select>
+				</form>
+				<input type="submit" value="Continue">
+			</div>
 		</div>
 	</div>
 
