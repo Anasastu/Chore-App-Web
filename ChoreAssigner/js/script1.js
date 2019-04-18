@@ -255,15 +255,84 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////  
   function choreOptions() {
+    let now = new Date()
+    var todaysDate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    /*
+      We need to glue the pieces of the form together in the loop below.
+      Numbering of the form parts seems random but in the loop they occupy 
+      the appropriately numbered position to complete the form
+    */
+    //1. CHORE
+    var form2 = "<form id='choreForm";
+    //3. INDEX 
+    var form4 = "' name='' class=''>Due Date<input type='date' id='choreDate";
+    //5. INDEX
+    var form6 = "' name='' min='";
+    //7. TODAYS DATE
+    var form8 = "'>Assign<select id='choreAssign";
+    //9. INDEX
+    var form10 = "'>";
+    //11. OPTIONS 
+    var form12 = "</select>Exempt<select id='choreExempt";
+    //13. INDEX
+    var form14 = "'>";
+    //15. OPTIONS
     
+    //this puts all the actors into the forms 
+    var formpart2n4 = ["<option value='null'>none</option>"];
+    for(var y = 0; y < actorNamesArray.length; y++){
+      let option = "<option value='actor" + y + "'>" + actorNamesArray[y] + "</option>";
+      formpart2n4 += option; 
+    }
 
+    var formpart5 = "</select></form></div>";
     
+    var choreOptionsFormsContainer = document.getElementById("choreOptionsForms");
+    var choreOptionsFormsFragment = document.createDocumentFragment();
+
+    // create forms
+    for(var x = 0; x < choreArray.length; x++){
+      let chore = "<div>" + choreArray[x];
+      let formpart1 = chore + form2 + x + form4 + x + form6 + todaysDate + form8 + x + form10;
+      let formpart3 = form12 + x + form14;
+      var completeform = formpart1 + formpart2n4 + formpart3 + formpart2n4 + formpart5;
+      let div = document.createElement('div');
+      div.innerHTML = completeform;
+      while(div.firstChild) {
+        choreOptionsFormsFragment.appendChild(div.firstChild);
+      }
+      // take the document fragment we made and glue it onto the DOM \m/
+      choreOptionsFormsContainer.appendChild(choreOptionsFormsFragment);
+    } 
+    // hide Chore selction 
+    document.getElementById("choreSelection").classList.toggle("hide");
+
+    // Reveal Chore Options Section 
+    document.getElementById("choreOptionsSection").classList.toggle("hide");
   }
 
+/*
+get one chore and do this
+/////////
+chore
+"<form id='choreForm"
+index
+"' name='' class=''>Due Date<input type='date' id='choreDate"
+INDEX
+"' name='' min='"
+todays date
+"'>Assign<select id='choreAssign"
+INDEX
+"'>"
+/////////
+THEN make options withh al actors
+OPTIONS with every actor names--- must include null option
+"</select>Exempt<select id='choreExemptINDEX'>"
+OPTIONS with every actors name--- must include null option
+"</select></form>"
 
 
-
-
+*/
 
 
 
