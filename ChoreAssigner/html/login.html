@@ -7,7 +7,8 @@
 	<meta charset="UTF-8">
 	<title>Login</title>
 	<link rel="icon" type="image/png" href="">
-	<link rel="stylesheet" type="text/css" href="">
+	<link rel="stylesheet" type="text/css" href="../css/loginCss.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script type="text/javascript" src=""></script>
 </head>
 <!-- 
@@ -21,23 +22,34 @@
 			I would like a global navigation section here. 
 			This login Page should not link to other pages though.... but the space should still be occupied for the look
 		-->
+		
+		<ul>
+		    <li><a href="#">Dashboard</a></li>
+		    <li><a href="#">Help</a></li>
+		    <li><a href="#">Contact</a></li>
+		</ul>
+		
 	</div>
 	<div>
-		<div>
+		<div class="login-box">
 			<h3>Login</h3>
 			<form id="login">	
 				<label for="email">
+					<!-- Added a email icon -->
+					<i class="fa fa-envelope icon" aria-hidden="true"></i>
 					<input id="email" type="text" name="email" class="" placeholder="Email" required>
 				</label>
 				<br>
 				<label for="password">
+					<!-- Added a password icon -->
+					<i class="fa fa-key icon" aria-hidden="true"></i>
 					<input id="password" type="password" class="" placeholder="Password" required>
 				</label>
 				<br>
 				<input type="submit" value="Login">
 			</form>
 		</div>
-		<div>
+		<div class="register-box">
 			<h4>New? Register Here!</h4>
 			<form id="register">
 				<label for="newEmail">
