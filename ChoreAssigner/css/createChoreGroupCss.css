@@ -1,0 +1,200 @@
+/* -version 2.2 - Dionte 4/19/2019 */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #FFFACD;
+    font-family: Arial;
+    color: #CD5C5C;
+    font-weight: bold;
+}
+
+.hide {
+	display: none;
+}
+
+.reveal {
+	display: block;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#navbar li {
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar a:hover {
+    background-color: #ADD8E6;
+}
+
+/* Center the selectGroup-box */
+.selectGroup-box {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Set up the input field */
+.selectGroup-box input[type="text"] {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 5px 10px 10px #CD5C5C;
+    
+}
+
+/* Set up the button */
+.btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: 3px solid #000000;
+    font-weight: bold;
+}
+
+/* Hover over the button changes color */
+.selectGroup-box input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #B22222;
+}
+
+/* Center the numOfActorsSelectionForm */
+#numOfActorsSelectionForm {
+    text-align: center;
+}
+
+/* Set up the input field */
+#numOfActorsSelectionForm input[type="submit"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Change the color of the button when
+   mouse is hovering */
+#numOfActorsSelectionForm input[type="submit"]:hover {
+    cursor: pointer;
+    background: rgba(205, 92, 92, 0.7);
+}
+
+/* Set up the dropdown list */
+#numOfActors {
+    width: 200px;
+    height: 40px;
+    border: 2px solid #CD5C5C;
+}
+
+/* Set up the nameSection */
+#nameSection {
+    margin: 0px auto;
+    width: 320px;
+    height: 420px;
+    background: rgba(0, 153, 204, 0.5);
+    text-align: center;
+    box-shadow: 5px 10px;
+}
+
+#nameSection h3 {
+   text-decoration: underline;
+    color: #000000;
+    padding-top: 5px;
+}
+
+/* Set up the nameSection input fields */
+#nameSection input[type="text"] {
+    width: 200px;
+    height: 15px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+/* Set up the nameSection button */
+#nameSection input[type="submit"] {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid #CD5C5C;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Change the color of the button when hovering over it with your mouse */
+#nameSection input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Set up the choreSelection */
+#choreSelection {
+    margin: 0px auto;
+    text-align: center;
+    background: rgba(0, 153, 204, 0.5);
+    width:400px;
+    height: 600px;
+    box-shadow: 5px 10px;
+}
+
+
+#choreSelection h4 {
+    text-decoration: underline;
+    padding-top: 5px;
+    color: #000000;
+}
+
+/* Set up a dotted border around the choreSelectionForm */
+#choreSelectionForm select {
+    width: 200px;
+    border: 3px dotted #CD5C5C;
+    margin-bottom: 10px;
+}
+
+/* Set up the width of the choreSelection input fields */
+#choreSelection input[type="text"] {
+    width: 150px;
+}
+
+.groupNameGoesHere {
+    text-decoration: underline;
+    color: #000000;
+}
+
+/* Set up choreOptionsSection */
+#choreOptionsSection {
+    padding: 5px;
+    font-size: 16px;
+}
+
+#choreOptionsForms {
+    margin-bottom: 10px;
+}
+
+/* Set up choreOptionsSubmit button */
+#choreOptionsSubmit {
+    height: 30px;
+    border: 3px solid #CD5C5C;
+    font-weight: bold;
+}
+
+#choreOptionsSubmit:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #FFFFFF;
+}

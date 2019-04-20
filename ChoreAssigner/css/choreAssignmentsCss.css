@@ -1,0 +1,30 @@
+/* -version 2.2 - Dionte 4/18/2019 */
+
+body {
+    margin: 0px auto;
+}
+
+/* Set style for the navigation bar */
+#nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#nav-bar li {
+    float: left;
+}
+
+#nav-bar li a {
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav-bar a:hover {
+    background-color: #ADD8E6;
+}

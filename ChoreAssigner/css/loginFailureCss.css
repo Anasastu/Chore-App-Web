@@ -1,0 +1,124 @@
+/* -version 2.2 - Dionte 4/19/2019 */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #336699;
+}
+
+h2 {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* Set style for the navigation bar */
+#nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#nav-bar li {
+    float: left;
+}
+
+#nav-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav-bar a:hover {
+    background-color: #ADD8E6;
+}
+
+.icon {
+    color: #FFFFFF;
+}
+
+/* Set up the background for the login-box div */
+.login-box {
+    margin: 0px auto;
+    width: 320px;
+    height: 420px;
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    border: 2px solid #FFFFFF;
+}
+
+
+.login-box h3 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+    color: #FFFFFF;
+}
+
+/* Set up the input text, password, and sumbit fields */
+.login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.login-box input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    background: transparent;
+    height: 40px;
+    color: #FFFFFF;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    color: #000000;
+    font-size: 18px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #FAFAD2;
+    color: #000;
+}
+
+
+/* Set up the background for the register section */
+.register-box {
+    text-align: center;
+}
+
+.register-box h4 {
+    color: #FFFFFF;
+}
+
+.register-box input[type="text"] {
+    width: 200px;
+    height: 30px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.register-box input[type="submit"] {
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.register-box input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #FAFAD2;
+}
