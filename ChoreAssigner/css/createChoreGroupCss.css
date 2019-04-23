@@ -9,6 +9,10 @@ body {
     font-weight: bold;
 }
 
+.highlightRed {
+    background-color: red;
+}
+
 .hide {
 	display: none;
 }
