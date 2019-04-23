@@ -25,8 +25,7 @@ function navbarHide() {
       document.getElementById("nav-bar").style.top = "-80px";
     }
     prevScrollpos = currentScrollPos;
-}
-//<----------------- END Show and Hide Nav Bar ------------------
+}//<----------------- END Show and Hide Nav Bar ------------------
 
 
 
@@ -38,11 +37,27 @@ function navbarHide() {
 //////////////////////////////////////////////
 function startCreateChoreGroup() {
   
+
+  //alert( Math.floor(Math.random() * (5 - 1)));
+
+
   // vars
   var nameOfGroup;
   var numberOfActors;
-  var actorNamesArray = [];
+  var actorsArray = [];
   var choreArray = [];
+  var Actor = {
+    name: "",
+    chores: 0,
+    rating: 1
+  };
+  var ChoreWithInfo = {
+    name: "",
+    date: "",
+    completed: false,
+    assigned: 'none',
+    exempt: 'none'
+  };
 
   initGroupName();
 
@@ -79,8 +94,7 @@ function startCreateChoreGroup() {
       initGroupName();
     }
 
-  }
-  //<----------------- END groupName ------------------
+  }//<----------------- END groupName ------------------
 
 
 
@@ -89,8 +103,8 @@ function startCreateChoreGroup() {
         this takes the number the user gives us
         and creates input boxes so they can name 
         each actor.
-        It uses the reusable function 
-        createDocumentFragment(validHTMLstring) 
+        When user hits submit each actor is made 
+        into Actor object 
   */
   //////////////////////////////////////////////
 
@@ -109,7 +123,7 @@ function startCreateChoreGroup() {
       //location of where groupname should be inserted
       var groupNameLocations = document.getElementsByClassName("groupNameGoesHere");
       //insert group name
-      for(var p = 0; p < groupNameLocations.length; p++) {
+      for(let p = 0; p < groupNameLocations.length; p++) {
         groupNameLocations[p].innerHTML = nameOfGroup;
       }
 
@@ -118,9 +132,9 @@ function startCreateChoreGroup() {
       //create new fragment
       var nameFragment = document.createDocumentFragment();
 
-      for (var i = 1; i <= numberOfActors; i++) {
+      for (let i = 1; i <= numberOfActors; i++) {
         //create name input for each actor 
-        var nameInfo = "<div class='virtualActor'>" + i + ". <input id='actor" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
+        var nameInfo = "<div class='virtualActor'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
         //create a new div element
         var div = document.createElement('div');
         //put the nameInfo html into the div we just created
@@ -145,8 +159,11 @@ function startCreateChoreGroup() {
       document.getElementById("nameSectionForm").addEventListener("submit",actorsIntoArray,false);
       
       function actorsIntoArray(evt) {
-        for(var x = 1; x <= numberOfActors; x++) {
-          actorNamesArray[x - 1] = document.getElementById("actor" + x).value;
+        for(let x = 1; x <= numberOfActors; x++) {
+          let person = Object.create(Actor);
+          person.name = document.getElementById("actorNaming" + x).value;
+          actorsArray[x - 1] = person;
+           
         }
         //this prevents the submit button from reloading the page
         evt.preventDefault();
@@ -159,8 +176,7 @@ function startCreateChoreGroup() {
       evt.preventDefault();
       initActors();
     }
-  }
-  //<------------------- END Add Actors  ---------------------
+  }//<------------------- END Add Actors  ---------------------
 
 
 
@@ -173,7 +189,7 @@ function startCreateChoreGroup() {
           - way for user to click chore to add to list
           - way for user to remove chore from list
   */
-  ////////////////////////////////////////////////   <<<<<<<<<<<<<<<<<<<<<<<<<< WORK HERE <<<<<<<<
+  ////////////////////////////////////////////////   
   function choreSelection() {
 
     // Hide Name Section
@@ -193,9 +209,9 @@ function startCreateChoreGroup() {
     // adds custom chore
     document.getElementById("customChoreSelectionForm").addEventListener("submit",addCustomChore,false);
     // add chore from list
-    document.getElementById("choreSelectionList").addEventListener("dblclick",addSelectedChore,false);
+    document.getElementById("choreSelectionList").addEventListener("click",addSelectedChore,false);
     //remove chore from list
-    document.getElementById("userSelectedChores").addEventListener("dblclick",removeChore,false);
+    document.getElementById("userSelectedChores").addEventListener("click",removeChore,false);
 
     function addCustomChore(evt) {
       var customChore = document.getElementById("customChore").value;
@@ -225,6 +241,7 @@ function startCreateChoreGroup() {
       }
       // take the document fragment we made and glue it onto the DOM \m/
       preChoreListContainer.appendChild(preChoreListFragment);
+      preChoreListContainer.size += 1;
     }
 
     function removeChore(evt) {
@@ -232,6 +249,7 @@ function startCreateChoreGroup() {
       let choreToRemove = choreList.selectedIndex; 
       choreList.options[choreToRemove].remove();
       evt.preventDefault();
+      preChoreListContainer.size -= 1;
     }
 
     document.getElementById("preChoreListForm").addEventListener("submit",choresIntoArray,false);
@@ -249,14 +267,20 @@ function startCreateChoreGroup() {
 
   }//<------------------- END Chore Selection  ---------------------
     
+
   ////////////////////////////////////////////////
   /*      CHORE OPTIONS
       user can select due dates, excemptions, and assignments for chores
   */
   ////////////////////////////////////////////////  
   function choreOptions() {
+    // set min day to current day
     let now = new Date()
-    var todaysDate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    let month = now.getMonth() + 1;
+    if(month < 10){
+      month = '0' + month;
+    }
+    var todaysDate = now.getFullYear() + '-' + month + '-' + now.getDate();
     /*
       We need to glue the pieces of the form together in the loop below.
       Numbering of the form parts seems random but in the loop they occupy 
@@ -265,24 +289,26 @@ function startCreateChoreGroup() {
     //1. CHORE
     var form2 = "<form id='choreForm";
     //3. INDEX 
-    var form4 = "' name='' class=''>Due Date<input type='date' id='choreDate";
+    var form4 = "' name='' class=''>Due Date <input type='date' id='choreDate";
     //5. INDEX
     var form6 = "' name='' min='";
     //7. TODAYS DATE
-    var form8 = "'>Assign<select id='choreAssign";
+    var form8 = "' class='selectedChoreDate' required> Assign <select id='choreAssign";
     //9. INDEX
     var form10 = "'>";
     //11. OPTIONS 
-    var form12 = "</select>Exempt<select id='choreExempt";
+    var form12 = "</select> Exempt <select id='choreExempt";
     //13. INDEX
     var form14 = "'>";
     //15. OPTIONS
     
     //this puts all the actors into the forms 
-    var formpart2n4 = ["<option value='null'>none</option>"];
-    for(var y = 0; y < actorNamesArray.length; y++){
-      let option = "<option value='actor" + y + "'>" + actorNamesArray[y] + "</option>";
-      formpart2n4 += option; 
+    var formpart2 = ["<option value='random'>Randomly</option>"];
+    var formpart4 = ["<option value='null'>none</option>"];
+    for(var y = 0; y < actorsArray.length; y++){
+      let option = "<option value='actor" + y + "'>" + actorsArray[y].name + "</option>";
+      formpart2 += option; 
+      formpart4 += option;
     }
 
     var formpart5 = "</select></form></div>";
@@ -295,7 +321,7 @@ function startCreateChoreGroup() {
       let chore = "<div>" + choreArray[x];
       let formpart1 = chore + form2 + x + form4 + x + form6 + todaysDate + form8 + x + form10;
       let formpart3 = form12 + x + form14;
-      var completeform = formpart1 + formpart2n4 + formpart3 + formpart2n4 + formpart5;
+      var completeform = formpart1 + formpart2 + formpart3 + formpart4 + formpart5;
       let div = document.createElement('div');
       div.innerHTML = completeform;
       while(div.firstChild) {
@@ -309,34 +335,190 @@ function startCreateChoreGroup() {
 
     // Reveal Chore Options Section 
     document.getElementById("choreOptionsSection").classList.toggle("hide");
-  }
 
-/*
-get one chore and do this
-/////////
-chore
-"<form id='choreForm"
-index
-"' name='' class=''>Due Date<input type='date' id='choreDate"
-INDEX
-"' name='' min='"
-todays date
-"'>Assign<select id='choreAssign"
-INDEX
-"'>"
-/////////
-THEN make options withh al actors
-OPTIONS with every actor names--- must include null option
-"</select>Exempt<select id='choreExemptINDEX'>"
-OPTIONS with every actors name--- must include null option
-"</select></form>"
+    document.getElementById("choreOptionsSubmit").addEventListener("click",checkForms,false);
+
+    function checkForms(evt) {
+      //validate forms
+      var allGood = true;
+      for(let x = 0; x < choreArray.length; x++){
+        let choreAssignee = document.getElementById("choreAssign" + x);
+        let choreExemptee = document.getElementById("choreExempt" + x);
+        let dueDate = document.getElementById("choreDate" + x);
+        if(dueDate.value == ""){
+            allGood = false;
+            if(!dueDate.classList.contains("highlightRed")){
+              dueDate.classList.toggle("highlightRed");
+            }
+        }else{
+          if(dueDate.classList.contains("highlightRed")){
+            dueDate.classList.toggle("highlightRed");
+          }
+        }
+        if(choreExemptee.value != "null"){
+          if(choreAssignee.value === choreExemptee.value){
+            allGood = false;
+            if(!choreAssignee.classList.contains("highlightRed")){
+              choreAssignee.classList.toggle("highlightRed");
+            }
+            if(!choreExemptee.classList.contains("highlightRed")){
+              choreExemptee.classList.toggle("highlightRed");
+            }
+          }else{
+            if(choreAssignee.classList.contains("highlightRed")){
+              choreAssignee.classList.toggle("highlightRed");
+            }
+            if(choreExemptee.classList.contains("highlightRed")){
+              choreExemptee.classList.toggle("highlightRed");
+            }
+          }
+        }
+      }// end for
+      if(allGood){
+        document.getElementById("choreOptionsSection").classList.toggle("hide");
+        //evt.preventDefault();
+        assignChores();
+      }
+    }//end checkForms
+  }//<------------------- END Chore Options  ---------------------
 
 
-*/
+  ////////////////////////////////////////////////
+  /*      ASSIGN CHORES
+        Randomly assign chores that were not 
+        already assigned to actors by the user.
+        Chores with excemptions must be dealt with
+  */
+  ////////////////////////////////////////////////
+
+  function assignChores() {
+
+    makeChores();
+    displayChoreAssignments();  
+
+    function makeChores() {
+      for(var i = 0; i < choreArray.length; i++){
+        // create choreWithInfo objects
+        var chore = Object.create(ChoreWithInfo);
+        chore.name = choreArray[i];
+        chore.date = document.getElementById("choreDate" + i).value;
+        chore.assigned = document.getElementById("choreAssign" + i).value;
+        chore.exempt = document.getElementById("choreExempt" + i).value;
+        if(chore.assigned != "random"){
+          let index = chore.assigned.substr(5);
+          chore.assigned = actorsArray[index];
+          chore.assigned.chores += 1;
+          actorsArray[index].chores += 1;
+
+        }else{
+          //if an actor is exempt from this chore
+          if(chore.exempt != "null"){
+            // get index and send to randomlyAssignChore
+            let exemptIndex = chore.exempt.substr(5);
+            let index = randomlyAssignChore(exemptIndex);
+            console.log("random Index = " + index + " exemption index = " + exemptIndex);
+            chore.assigned = actorsArray[index];
+            chore.assigned.chores += 1;
+            actorsArray[index].chores += 1;
+          }else{
+            // no one is exempt send to randomlyAssignChore
+            let index = randomlyAssignChore(666);
+            console.log("random index = " + index);
+            chore.assigned = actorsArray[index];
+            chore.assigned.chores += 1; 
+            actorsArray[index].chores += 1;                  
+          }
+        }
+        choreArray[i] = chore;
+      } 
+    }// end make chores
+
+
+    function randomlyAssignChore(exemption) {
+      var randomNum;
+      if(exemption != 666){ 
+        do{
+          randomNum = Math.floor(Math.random() * (numberOfActors));
+        }while(randomNum == exemption);
+        return randomNum;
+      }else{
+        randomNum = Math.floor(Math.random() * (numberOfActors));
+        return randomNum;
+      }
+    }
+    /*mega random number generator from
+    P. L'Ecuyer: A table of Linear Congruential Generators of different sizes and good lattice structure, April 30 1997.*/
+    function mulberry32(a) {
+      return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      }
+    }
+    ////////////////////////////////////////////////////////////
 
 
 
-}//<------------------- END Create Chore Group  ---------------------
+ 
+    
+  }//<------------------- END Assign Chores ---------------------
+
+
+  ////////////////////////////////////////////////
+  /*      DISPLAY CHORE ASSIGNMENTS
+        Populates page with list of every actor
+        and what chores they have
+          - due date for every chore
+        We need to work on how to incorporate
+        the rating and how to mark as complete.
+  */
+  ////////////////////////////////////////////////
+  function displayChoreAssignments() {
+
+    var assignedChoreListContainer = document.getElementById("assignedChoresList");
+    var assignedChoreListFragment = document.createDocumentFragment();
+
+
+    var html1 = "<div class='actorContainer'><div class='nameRating'><div class='nameItem'>";
+            //Actor Name
+    var html3 ="</div><div class='ratingItem'>Rating = ";
+            //Rating
+    var html5 = "</div></div><div class='choreDueCompleted'><div class='choreItem'>";
+            //Chore
+    var html7 = "</div><div class='dueItem'>";
+            //Due Date
+    var html9 = "</div><div class='completedItem'>";
+            //Completed
+    var html11= "</div>";
+    var htmlPart3= "</div></div><br>";
+
+
+    for(var x = 0; x < actorsArray.length; x++){
+      var actor = actorsArray[x];
+      var actorName = actor.name;
+      var actorRating = actor.rating;
+      var htmlPart1 = html1 + actorName + html3 + actorRating;
+      var htmlPart2 = "";
+      for(var i = 0; i < choreArray.length; i++){
+        if(choreArray[i].assigned.name == actorName){
+          htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9 + "Incomplete" + html11;
+        }
+      }
+      let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
+      let div = document.createElement('div');
+      div.innerHTML = fullActorContainer;
+      while(div.firstChild) {
+        assignedChoreListFragment.appendChild(div.firstChild);
+      }
+      // take the document fragment we made and glue it onto the DOM \m/
+      assignedChoreListContainer.appendChild(assignedChoreListFragment);
+    }
+  }//<------------------- END Display Chore Assignments ---------------------
+}//<**************----- END Create Chore Group  ------****************
+
+
+
 
 
 ////////////////////////////////////////////////
