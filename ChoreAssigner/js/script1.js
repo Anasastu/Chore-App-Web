@@ -14,7 +14,6 @@
 function showAndHideNavBar() {
   window.onscroll = navbarHide;
 }
-
 var prevScrollpos = window.pageYOffset;
 
 function navbarHide() {
@@ -28,7 +27,6 @@ function navbarHide() {
 }//<----------------- END Show and Hide Nav Bar ------------------
 
 
-
 //////////////////////////////////////////////
 /*    START THE CREATE NEW GROUP PROCESS
       this starts the whole chain of functions
@@ -36,11 +34,6 @@ function navbarHide() {
 */
 //////////////////////////////////////////////
 function startCreateChoreGroup() {
-  
-
-  //alert( Math.floor(Math.random() * (5 - 1)));
-
-
   // vars
   var nameOfGroup;
   var numberOfActors;
@@ -49,7 +42,8 @@ function startCreateChoreGroup() {
   var Actor = {
     name: "",
     chores: 0,
-    rating: 1
+    rating: 1,
+    email: ""
   };
   var ChoreWithInfo = {
     name: "",
@@ -60,7 +54,6 @@ function startCreateChoreGroup() {
   };
 
   initGroupName();
-
   //*******************************************
   //////////////////////////////////////////////
   /*    GROUP NAME
@@ -72,30 +65,22 @@ function startCreateChoreGroup() {
   }
 
   function groupName(evt) {
-    
     nameOfGroup = document.getElementById("groupName").value;
-
     if(nameOfGroup != "") {
       //hide groupName div 
       document.getElementById("selectGroupName").classList.add("hide");
-
       //unhide the numOfActorsSelection div
       document.getElementById("numOfActorsSelection").classList.toggle("hide");
-
       //this prevents the submit button from reloading the page
       evt.preventDefault();
-
       //go to actors section
       initActors();
-    }
-    else {
+    }else {
       //this prevents the submit button from reloading the page
       evt.preventDefault();
       initGroupName();
     }
-
   }//<----------------- END groupName ------------------
-
 
 
   //////////////////////////////////////////////
@@ -107,18 +92,22 @@ function startCreateChoreGroup() {
         into Actor object 
   */
   //////////////////////////////////////////////
-
   function initActors() {
     document.getElementById("numOfActorsSelectionForm").addEventListener("submit",addActors,false);
   }
 
   function addActors(evt) {
     numberOfActors = document.getElementById("numOfActors").value;
-
     if(numberOfActors != 'null') {
-
+      ///////CSS
       // Reveal Name Section
       document.getElementById("nameSection").classList.toggle("hide");
+      // Hide Number Selector 
+      document.getElementById("numOfActorsSelection").classList.toggle("hide");
+
+      ///////EVENT LISTENERS
+      // Go to Chore Selection when done
+      document.getElementById("nameSectionForm").addEventListener("submit",actorsIntoArray,false);
 
       //location of where groupname should be inserted
       var groupNameLocations = document.getElementsByClassName("groupNameGoesHere");
@@ -127,12 +116,17 @@ function startCreateChoreGroup() {
         groupNameLocations[p].innerHTML = nameOfGroup;
       }
 
+      ////////CREATE DOCUMENT FRAGMENT
       //area we are dynamically adding name spots
       var nameContainer = document.getElementById("nameSectionForm");
       //create new fragment
       var nameFragment = document.createDocumentFragment();
-
       for (let i = 1; i <= numberOfActors; i++) {
+        /*
+        EDITTING CSS 
+        - please leave any ids alone, they are required for the script to work
+        - classes can freely be added/ changed, just use SINGLE quotes
+        */
         //create name input for each actor 
         var nameInfo = "<div class='virtualActor'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
         //create a new div element
@@ -145,39 +139,27 @@ function startCreateChoreGroup() {
       }//end for
       // take the document fragment we made and glue it onto the DOM \m/
       nameContainer.appendChild(nameFragment);
-
       // give user a submit button
       nameContainer.appendChild(createFragment("<input type='submit' value='Continue'>"));
-
-      // Hide Number Selector 
-      document.getElementById("numOfActorsSelection").classList.toggle("hide");
-
-      //this prevents the submit button from reloading the page
-      evt.preventDefault();
-
-      // Go to Chore Selection when done
-      document.getElementById("nameSectionForm").addEventListener("submit",actorsIntoArray,false);
       
       function actorsIntoArray(evt) {
         for(let x = 1; x <= numberOfActors; x++) {
           let person = Object.create(Actor);
           person.name = document.getElementById("actorNaming" + x).value;
           actorsArray[x - 1] = person;
-           
         }
         //this prevents the submit button from reloading the page
         evt.preventDefault();
         choreSelection();
       }//end actorsIntoArray
-
-    }
-    else {
+      //this prevents the submit button from reloading the page
+      evt.preventDefault();
+    }else {
       //this prevents the submit button from reloading the page
       evt.preventDefault();
       initActors();
     }
   }//<------------------- END Add Actors  ---------------------
-
 
 
   //////////////////////////////////////////////// 
@@ -191,27 +173,27 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////   
   function choreSelection() {
-
+    /////////CSS 
     // Hide Name Section
     document.getElementById("nameSection").classList.toggle("hide");
     // Reveal Chore List Selector 
     document.getElementById("choreSelection").classList.toggle("hide");
-
     // Inserts Title into HTML
     document.getElementById("choreSelectionTitle").innerHTML = nameOfGroup + " Chore Selection";
 
-
-    //preliminary chore list area
-    var preChoreListContainer = document.getElementById("userSelectedChores");
-    //create new fragment
-    var preChoreListFragment = document.createDocumentFragment();
-
+    ////////EVENT LISTENERS
     // adds custom chore
     document.getElementById("customChoreSelectionForm").addEventListener("submit",addCustomChore,false);
     // add chore from list
     document.getElementById("choreSelectionList").addEventListener("click",addSelectedChore,false);
     //remove chore from list
     document.getElementById("userSelectedChores").addEventListener("click",removeChore,false);
+    // user hits continue button
+    document.getElementById("preChoreListForm").addEventListener("submit",choresIntoArray,false);
+
+    ////////CREATE DOCUMENT FRAGMENT
+    //preliminary chore list area
+    var preChoreListContainer = document.getElementById("userSelectedChores");
 
     function addCustomChore(evt) {
       var customChore = document.getElementById("customChore").value;
@@ -234,13 +216,8 @@ function startCreateChoreGroup() {
 
     function addChore(chore) {
       let addToList = "<option value='" + chore + "'>" + chore + "</option>";
-      let div = document.createElement('div');
-      div.innerHTML = addToList;
-      while(div.firstChild) {
-        preChoreListFragment.appendChild(div.firstChild);
-      }
       // take the document fragment we made and glue it onto the DOM \m/
-      preChoreListContainer.appendChild(preChoreListFragment);
+      preChoreListContainer.appendChild(createFragment(addToList));
       preChoreListContainer.size += 1;
     }
 
@@ -252,8 +229,6 @@ function startCreateChoreGroup() {
       preChoreListContainer.size -= 1;
     }
 
-    document.getElementById("preChoreListForm").addEventListener("submit",choresIntoArray,false);
-
     function choresIntoArray(evt) {
       let choreList = document.getElementById("userSelectedChores");
       let chore = "";
@@ -264,7 +239,6 @@ function startCreateChoreGroup() {
       evt.preventDefault();
       choreOptions();
     }
-
   }//<------------------- END Chore Selection  ---------------------
     
 
@@ -274,6 +248,18 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////  
   function choreOptions() {
+    //////CSS hides/reveals divs
+    // hide Chore selction 
+    document.getElementById("choreSelection").classList.toggle("hide");
+    // Reveal Chore Options Section 
+    document.getElementById("choreOptionsSection").classList.toggle("hide");
+
+    //////EVENT LISTENER - user hits continue
+    document.getElementById("choreOptionsSubmit").addEventListener("click",checkForms,false);
+
+    //////////DOCUMENT FRAGMENT NEEDS CONTAINER
+    var choreOptionsFormsContainer = document.getElementById("choreOptionsForms");
+    
     // set min day to current day
     let now = new Date()
     let month = now.getMonth() + 1;
@@ -285,6 +271,11 @@ function startCreateChoreGroup() {
       We need to glue the pieces of the form together in the loop below.
       Numbering of the form parts seems random but in the loop they occupy 
       the appropriately numbered position to complete the form
+    */
+    /*
+      EDITTING CSS
+      - please leave any ids alone, they are required for the script to work
+      - classes can freely be added/ changed, just use SINGLE quotes
     */
     //1. CHORE
     var form2 = "<form id='choreForm";
@@ -301,7 +292,6 @@ function startCreateChoreGroup() {
     //13. INDEX
     var form14 = "'>";
     //15. OPTIONS
-    
     //this puts all the actors into the forms 
     var formpart2 = ["<option value='random'>Randomly</option>"];
     var formpart4 = ["<option value='null'>none</option>"];
@@ -310,11 +300,7 @@ function startCreateChoreGroup() {
       formpart2 += option; 
       formpart4 += option;
     }
-
     var formpart5 = "</select></form></div>";
-    
-    var choreOptionsFormsContainer = document.getElementById("choreOptionsForms");
-    var choreOptionsFormsFragment = document.createDocumentFragment();
 
     // create forms
     for(var x = 0; x < choreArray.length; x++){
@@ -322,22 +308,9 @@ function startCreateChoreGroup() {
       let formpart1 = chore + form2 + x + form4 + x + form6 + todaysDate + form8 + x + form10;
       let formpart3 = form12 + x + form14;
       var completeform = formpart1 + formpart2 + formpart3 + formpart4 + formpart5;
-      let div = document.createElement('div');
-      div.innerHTML = completeform;
-      while(div.firstChild) {
-        choreOptionsFormsFragment.appendChild(div.firstChild);
-      }
-      // take the document fragment we made and glue it onto the DOM \m/
-      choreOptionsFormsContainer.appendChild(choreOptionsFormsFragment);
+      choreOptionsFormsContainer.appendChild(createFragment(completeform));
     } 
-    // hide Chore selction 
-    document.getElementById("choreSelection").classList.toggle("hide");
-
-    // Reveal Chore Options Section 
-    document.getElementById("choreOptionsSection").classList.toggle("hide");
-
-    document.getElementById("choreOptionsSubmit").addEventListener("click",checkForms,false);
-
+    
     function checkForms(evt) {
       //validate forms
       var allGood = true;
@@ -390,7 +363,6 @@ function startCreateChoreGroup() {
         Chores with excemptions must be dealt with
   */
   ////////////////////////////////////////////////
-
   function assignChores() {
 
     makeChores();
@@ -409,7 +381,6 @@ function startCreateChoreGroup() {
           chore.assigned = actorsArray[index];
           chore.assigned.chores += 1;
           actorsArray[index].chores += 1;
-
         }else{
           //if an actor is exempt from this chore
           if(chore.exempt != "null"){
@@ -433,7 +404,6 @@ function startCreateChoreGroup() {
       } 
     }// end make chores
 
-
     function randomlyAssignChore(exemption) {
       var randomNum;
       if(exemption != 666){ 
@@ -456,12 +426,7 @@ function startCreateChoreGroup() {
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
       }
     }
-    ////////////////////////////////////////////////////////////
-
-
-
- 
-    
+    //////////////////////////////////////////////////////////// 
   }//<------------------- END Assign Chores ---------------------
 
 
@@ -475,11 +440,12 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////
   function displayChoreAssignments() {
-
+    //////////DOCUMENT FRAGMENT NEEDS CONTAINER
     var assignedChoreListContainer = document.getElementById("assignedChoresList");
-    var assignedChoreListFragment = document.createDocumentFragment();
-
-
+    /*
+      EDITTING CSS - please carefully go in and add classes with SINGLE quotes 
+                   - feel free to rename the classes to whatever you want
+    */
     var html1 = "<div class='actorContainer'><div class='nameRating'><div class='nameItem'>";
             //Actor Name
     var html3 ="</div><div class='ratingItem'>Rating = ";
@@ -493,7 +459,6 @@ function startCreateChoreGroup() {
     var html11= "</div>";
     var htmlPart3= "</div></div><br>";
 
-
     for(var x = 0; x < actorsArray.length; x++){
       var actor = actorsArray[x];
       var actorName = actor.name;
@@ -506,19 +471,11 @@ function startCreateChoreGroup() {
         }
       }
       let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
-      let div = document.createElement('div');
-      div.innerHTML = fullActorContainer;
-      while(div.firstChild) {
-        assignedChoreListFragment.appendChild(div.firstChild);
-      }
       // take the document fragment we made and glue it onto the DOM \m/
-      assignedChoreListContainer.appendChild(assignedChoreListFragment);
+      assignedChoreListContainer.appendChild(createFragment(fullActorContainer));
     }
   }//<------------------- END Display Chore Assignments ---------------------
 }//<**************----- END Create Chore Group  ------****************
-
-
-
 
 
 ////////////////////////////////////////////////
@@ -538,8 +495,6 @@ function createFragment(validHtml) {
 }//<----------------END create doc fragment --------------------
 
 
-
-
 //////////////////////////////////////////////
 /*  MULTI WINDOW.ONLOAD FUNCT STARTER
     any functions that need to 
@@ -547,7 +502,6 @@ function createFragment(validHtml) {
     using the addLoadEvent() func
 */
 //////////////////////////////////////////////
-
 function addLoadEvent(func) {
   var oldonload = window.onload;
   if (typeof window.onload != 'function') {
