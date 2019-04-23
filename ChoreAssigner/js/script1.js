@@ -377,26 +377,25 @@ function startCreateChoreGroup() {
         chore.exempt = document.getElementById("choreExempt" + i).value;
         // actors manully assigned
         if(chore.assigned != "random"){
+          // get index of assigned actor 
           let index = chore.assigned.substr(5);
           chore.assigned = actorsArray[index];
           chore.manuallyAssigned = true;
           chore.assigned.chores += 1;
           actorsArray[index].chores += 1;
         }else{
-          //if an actor is exempt from this chore
+          // chore assigned randomly and has exemption 
           if(chore.exempt != "null"){
-            // get index and send to randomlyAssignChore
+            // get index of exemption and send to randomlyAssignChore
             let exemptIndex = chore.exempt.substr(5);
             let index = randomlyAssignChore(exemptIndex);
-            //console.log("random Index = " + index + " exemption index = " + exemptIndex);
             chore.assigned = actorsArray[index];
             chore.exempt = actorsArray[exemptIndex].name;
             chore.assigned.chores += 1;
             actorsArray[index].chores += 1;
           }else{
-            // no one is exempt or assigned
-            let index = randomlyAssignChore(666);
-            //console.log("random index = " + index);
+            // chore assigned randomly w/ no exemptions
+            let index = randomlyAssignChore(666); //666 lets randAssignChore know there are no exemptions
             chore.assigned = actorsArray[index];
             chore.assigned.chores += 1; 
             actorsArray[index].chores += 1;                  
@@ -439,16 +438,16 @@ function startCreateChoreGroup() {
           if(actorsArray[x].chores >= max){
             max = actorsArray[x].chores;
             maxIndex = x;
-            console.log("max = " + max);
-            console.log("maxIndex = " + maxIndex);
+            //console.log("max = " + max);
+            //console.log("maxIndex = " + maxIndex);
           }
           if(actorsArray[x].chores <= min){
             min = actorsArray[x].chores;
             minIndex = x;
-            console.log("min = " + min);
-            console.log("minIndex = " + minIndex);
+            //console.log("min = " + min);
+            //console.log("minIndex = " + minIndex);
           }
-          console.log(x);
+          //console.log("inner loop " + x + " of " + actorsArray.length);
         }
         if(max >= 2){
           for(let y = 0; y < choreArray.length; y++){
@@ -460,11 +459,12 @@ function startCreateChoreGroup() {
               choreArray[y].assigned.chores += 1;
               actorsArray[minIndex].chores += 1;
               actorsArray[maxIndex].chores -= 1;
-              console.log("Switching " + maxIndex + "with " + minIndex);
+              //console.log("Switching " + maxIndex + "with " + minIndex);
               break;
             }
           }
         }
+        //console.log("outer loop " + p + " of " + actorsArray.length);
       }
     }// end distributionCheck
     //////////////////////////////////////////////////////////// 
@@ -498,7 +498,7 @@ function startCreateChoreGroup() {
     var html9 = "</div><div class='completedItem'>";
             //Completed
     var html11= "</div>";
-    var htmlPart3= "</div></div><br>";
+    var htmlPart3= "</div></div></div><br>";
 
     for(var x = 0; x < actorsArray.length; x++){
       var actor = actorsArray[x];
