@@ -166,10 +166,6 @@ function startCreateChoreGroup() {
   /*      `CHORE SELECTION`
           User selects chores from list
           or writes custom chore
-          WORK ON THESE
-          - custom add isnt working
-          - way for user to click chore to add to list
-          - way for user to remove chore from list
   */
   ////////////////////////////////////////////////   
   function choreSelection() {
