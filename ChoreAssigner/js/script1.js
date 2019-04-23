@@ -50,7 +50,8 @@ function startCreateChoreGroup() {
     date: "",
     completed: false,
     assigned: 'none',
-    exempt: 'none'
+    exempt: 'none',
+    manuallyAssigned: false
   };
 
   initGroupName();
@@ -362,7 +363,9 @@ function startCreateChoreGroup() {
   function assignChores() {
 
     makeChores();
+    distributionCheck();
     displayChoreAssignments();  
+    
 
     function makeChores() {
       for(var i = 0; i < choreArray.length; i++){
@@ -372,9 +375,11 @@ function startCreateChoreGroup() {
         chore.date = document.getElementById("choreDate" + i).value;
         chore.assigned = document.getElementById("choreAssign" + i).value;
         chore.exempt = document.getElementById("choreExempt" + i).value;
+        // actors manully assigned
         if(chore.assigned != "random"){
           let index = chore.assigned.substr(5);
           chore.assigned = actorsArray[index];
+          chore.manuallyAssigned = true;
           chore.assigned.chores += 1;
           actorsArray[index].chores += 1;
         }else{
@@ -383,14 +388,15 @@ function startCreateChoreGroup() {
             // get index and send to randomlyAssignChore
             let exemptIndex = chore.exempt.substr(5);
             let index = randomlyAssignChore(exemptIndex);
-            console.log("random Index = " + index + " exemption index = " + exemptIndex);
+            //console.log("random Index = " + index + " exemption index = " + exemptIndex);
             chore.assigned = actorsArray[index];
+            chore.exempt = actorsArray[exemptIndex].name;
             chore.assigned.chores += 1;
             actorsArray[index].chores += 1;
           }else{
-            // no one is exempt send to randomlyAssignChore
+            // no one is exempt or assigned
             let index = randomlyAssignChore(666);
-            console.log("random index = " + index);
+            //console.log("random index = " + index);
             chore.assigned = actorsArray[index];
             chore.assigned.chores += 1; 
             actorsArray[index].chores += 1;                  
@@ -422,6 +428,45 @@ function startCreateChoreGroup() {
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
       }
     }
+
+    function distributionCheck(){
+      for(var p = 0; p < actorsArray.length; p++){
+        var max = actorsArray[p].chores;
+        var maxIndex = p;
+        var min = actorsArray[p].chores;
+        var minIndex = p;
+        for(var x = 0; x < actorsArray.length; x++){
+          if(actorsArray[x].chores >= max){
+            max = actorsArray[x].chores;
+            maxIndex = x;
+            console.log("max = " + max);
+            console.log("maxIndex = " + maxIndex);
+          }
+          if(actorsArray[x].chores <= min){
+            min = actorsArray[x].chores;
+            minIndex = x;
+            console.log("min = " + min);
+            console.log("minIndex = " + minIndex);
+          }
+          console.log(x);
+        }
+        if(max >= 2){
+          for(let y = 0; y < choreArray.length; y++){
+            if((actorsArray[maxIndex].name == choreArray[y].assigned.name) && 
+               (choreArray[y].manuallyAssigned == false) && 
+               (choreArray[y].exempt != actorsArray[minIndex].name)) 
+            {
+              choreArray[y].assigned = actorsArray[minIndex];
+              choreArray[y].assigned.chores += 1;
+              actorsArray[minIndex].chores += 1;
+              actorsArray[maxIndex].chores -= 1;
+              console.log("Switching " + maxIndex + "with " + minIndex);
+              break;
+            }
+          }
+        }
+      }
+    }// end distributionCheck
     //////////////////////////////////////////////////////////// 
   }//<------------------- END Assign Chores ---------------------
 
