@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Make Chore Group</title>
 	<link rel="icon" type="image/png" href="">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/createChoreGroupCss.css">
 	<script type="text/javascript" src="../js/script1.js"></script>
 </head>
@@ -70,6 +71,7 @@
 				</select>
 			</label>
 			<br>
+			<input type="reset" value="Back">
 			<input type="submit" value="Continue">	
 		</form>
 	</div>
@@ -85,6 +87,10 @@
 		<h3 class="groupNameGoesHere"></h3>
 		<p>Enter in their names!</p>
 		<form id="nameSectionForm" class="">
+			<div id="nameSectionFormButtons">
+				<input type='reset' value='Back'>
+				<input type='submit' value='Continue'>
+			</div>
 		</form>
 	</div>
 	<!-- Chore Selection 
@@ -97,22 +103,45 @@
 		<p>Please select all the chores that need to get done below.<br>If you dont find them in the list, write them in!</p>
 		<form id="choreSelectionForm" class="">
 			<select id="choreSelectionList" name="" size="7">
-			  	<option value="washDishes">Wash Dishes</option>
-			  	<option value="vacuum">Vacuum</option>
-			  	<option value="cleanBathroom">Clean Bathroom</option>
-				<option value="cleanLivingroom">Clean Livingroom</option>
-				<option value="cleanKitchen">Clean Kitchen</option>
-			  	<option value="cleanBedRoom">Clean Bedroom</option>
-			  	<option value="cleanDiningRoom">Clean Dining Room</option>
-				<option value="1">option1</option>
-				<option value="2">option2</option>
-			  	<option value="3">option3</option>
-			  	<option value="4">option4</option>
-				<option value="5">option5</option>
-				<option value="6">option6</option>
-			  	<option value="7">option7</option>
-			  	<option value="8">option8</option>
-				<option value="9">option9</option>
+			  	<option value='choreName'>Dust/Wipe surfaces</option>
+				<option value='choreName'>Dust/Clean Windows</option>
+				<option value='choreName'>Vacuum Floor</option>
+				<option value='choreName'>Sweep Floor</option>
+				<option value='choreName'>Mop Floor</option>
+				<option value='choreName'>Wash Dishes</option>
+				<option value='choreName'>Prepare/Cook Meal</option>
+				<option value='choreName'>Grocery Shopping</option>
+				<option value='choreName'>Do Laundry</option>
+				<option value='choreName'>Wash Bedding</option>
+				<option value='choreName'>Clean Bathroom</option>
+				<option value='choreName'>Scrub Toilet</option>
+				<option value='choreName'>Scrub Sink</option>
+				<option value='choreName'>Scrub Tub</option>
+				<option value='choreName'>Scrub Shower Stall</option>
+				<option value='choreName'>Organize Shelves</option>
+				<option value='choreName'>Clean Kitchen</option>
+				<option value='choreName'>Clean Fridge</option>
+				<option value='choreName'>Clean Oven</option>
+				<option value='choreName'>Clean Stove</option>
+				<option value='choreName'>Clean/Organize Pantry</option>
+				<option value='choreName'>Water Indoor Plants</option>
+				<option value='choreName'>Water Garden Plants</option>
+				<option value='choreName'>Take Out Trash</option>
+				<option value='choreName'>Walk Dog(s)</option>
+				<option value='choreName'>Feed Dog(s)</option>
+				<option value='choreName'>Feed Cat(s)</option>
+				<option value='choreName'>Feed Fish(es)</option>
+				<option value='choreName'>Clean/Change Cat Litter</option>
+				<option value='choreName'>Clean Fish Tank(s)</option>
+				<option value='choreName'>Clean Driveway</option>
+				<option value='choreName'>Clean Deck</option>
+				<option value='choreName'>Pull Weed</option>
+				<option value='choreName'>Mow Lawn</option>
+				<option value='choreName'>Rake leaves</option>
+				<option value='choreName'>Shovel Snow</option>
+				<option value='choreName'>Clean Fireplace</option>
+				<option value='choreName'>Clean Gutter</option>
+				<option value='choreName'>Wash Car</option>
 			</select>
 		</form>
 		<form id="customChoreSelectionForm">
@@ -130,6 +159,7 @@
 				<form id="preChoreListForm">
 					<select id="userSelectedChores" name="" size="">
 					</select>
+					<input type='reset' value='Back'>
 					<input type="submit" value="Continue">
 				</form>
 			</div>
@@ -144,7 +174,8 @@
       			<div id='choreOptionsForms'>
 	      		</div>
 	      		<div>
-					<button id="choreOptionsSubmit">RANDOMLY ASSIGN TEH CHORES</button>
+	      			<button id="choreOptionsBack">Back</button>
+					<button id="choreOptionsSubmit">ASSIGN CHORES</button>
       			</div>
       		</div>
       	</div>
