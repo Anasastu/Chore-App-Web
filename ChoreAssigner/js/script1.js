@@ -1,6 +1,7 @@
 /* 
   CHORE APP : WEB BASED VERSION
   CS177 SPRING 2019
+  Spencer Hemstreet
 */
 
 //////////////////////////////////////////////
@@ -71,14 +72,23 @@ function startCreateChoreGroup() {
       //hide groupName div 
       document.getElementById("selectGroupName").classList.add("hide");
       //unhide the numOfActorsSelection div
-      document.getElementById("numOfActorsSelection").classList.toggle("hide");
+      document.getElementById("numOfActorsSelection").classList.remove("hide");
       //this prevents the submit button from reloading the page
       evt.preventDefault();
       //go to actors section
+
+      //location of where groupname should be inserted
+      var groupNameLocations = document.getElementsByClassName("groupNameGoesHere");
+      //insert group name
+      for(let p = 0; p < groupNameLocations.length; p++) {
+        groupNameLocations[p].innerHTML = nameOfGroup;
+      }
+
       initActors();
     }else {
-      //this prevents the submit button from reloading the page
-      evt.preventDefault();
+      if(evt){
+        evt.preventDefault();
+      }
       initGroupName();
     }
   }//<----------------- END groupName ------------------
@@ -94,32 +104,49 @@ function startCreateChoreGroup() {
   */
   //////////////////////////////////////////////
   function initActors() {
+    document.getElementById("numOfActorsSelectionForm").addEventListener("reset",backToRenameGroup,false);
     document.getElementById("numOfActorsSelectionForm").addEventListener("submit",addActors,false);
+  }
+
+  function backToRenameGroup(evt){
+    document.getElementById("selectGroupName").classList.toggle("hide");
+    document.getElementById("numOfActorsSelection").classList.toggle("hide");
+    //evt.preventDefault();
+    initGroupName();
+  }
+
+  function backToinitActors(evt){
+    document.getElementById("nameSection").classList.add("hide");
+    document.getElementById("numOfActorsSelection").classList.remove("hide");
+    let deleteNameSection = document.getElementById("nameSectionForm").querySelectorAll('.namingOfActors');
+    for(let i = 0; i < deleteNameSection.length; i++){
+      deleteNameSection[i].remove();
+    }
+    //evt.preventDefault();
+    document.getElementById("numOfActors").value = 'null';
+    initActors();
   }
 
   function addActors(evt) {
     numberOfActors = document.getElementById("numOfActors").value;
+    //evt.preventDefault();
     if(numberOfActors != 'null') {
       ///////CSS
       // Reveal Name Section
-      document.getElementById("nameSection").classList.toggle("hide");
+      document.getElementById("nameSection").classList.remove("hide");
       // Hide Number Selector 
-      document.getElementById("numOfActorsSelection").classList.toggle("hide");
+      document.getElementById("numOfActorsSelection").classList.add("hide");
 
       ///////EVENT LISTENERS
       // Go to Chore Selection when done
       document.getElementById("nameSectionForm").addEventListener("submit",actorsIntoArray,false);
-
-      //location of where groupname should be inserted
-      var groupNameLocations = document.getElementsByClassName("groupNameGoesHere");
-      //insert group name
-      for(let p = 0; p < groupNameLocations.length; p++) {
-        groupNameLocations[p].innerHTML = nameOfGroup;
-      }
+      // go back if user hits back 
+      document.getElementById("nameSectionForm").addEventListener("reset",backToinitActors,false);
 
       ////////CREATE DOCUMENT FRAGMENT
       //area we are dynamically adding name spots
       var nameContainer = document.getElementById("nameSectionForm");
+      var buttons = document.getElementById("nameSectionFormButtons");
       //create new fragment
       var nameFragment = document.createDocumentFragment();
       for (let i = 1; i <= numberOfActors; i++) {
@@ -129,7 +156,7 @@ function startCreateChoreGroup() {
         - classes can freely be added/ changed, just use SINGLE quotes
         */
         //create name input for each actor 
-        var nameInfo = "<div class='virtualActor'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
+        var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
         //create a new div element
         var div = document.createElement('div');
         //put the nameInfo html into the div we just created
@@ -139,22 +166,17 @@ function startCreateChoreGroup() {
         }
       }//end for
       // take the document fragment we made and glue it onto the DOM \m/
-      nameContainer.appendChild(nameFragment);
+      nameContainer.insertBefore(nameFragment, buttons);
+      // give user back button
+     //nameContainer.appendChild(createFragment("<input type='reset' value='Back' class='namingOfActors'>"));
       // give user a submit button
-      nameContainer.appendChild(createFragment("<input type='submit' value='Continue'>"));
+      //nameContainer.appendChild(createFragment("<input type='submit' value='Continue' class='namingOfActors'>"));
+
       
-      function actorsIntoArray(evt) {
-        for(let x = 1; x <= numberOfActors; x++) {
-          let person = Object.create(Actor);
-          person.name = document.getElementById("actorNaming" + x).value;
-          actorsArray[x - 1] = person;
-        }
-        //this prevents the submit button from reloading the page
-        evt.preventDefault();
-        choreSelection();
-      }//end actorsIntoArray
       //this prevents the submit button from reloading the page
-      evt.preventDefault();
+      if(evt){
+        evt.preventDefault();
+      }
     }else {
       //this prevents the submit button from reloading the page
       evt.preventDefault();
@@ -162,6 +184,19 @@ function startCreateChoreGroup() {
     }
   }//<------------------- END Add Actors  ---------------------
 
+ function actorsIntoArray(evt) {
+    var x = 1;
+    for(x = 1; x <= numberOfActors; x++) {
+      let person = Object.create(Actor);
+      person.name = document.getElementById("actorNaming" + x).value;
+      actorsArray[x - 1] = person;
+    }
+    //this prevents the submit button from reloading the page
+    evt.preventDefault();
+     // Hide Name Section
+    document.getElementById("nameSection").classList.add("hide");
+    choreSelection();
+  }//end actorsIntoArray
 
   //////////////////////////////////////////////// 
   /*      `CHORE SELECTION`
@@ -171,13 +206,15 @@ function startCreateChoreGroup() {
   ////////////////////////////////////////////////   
   function choreSelection() {
     /////////CSS 
-    // Hide Name Section
-    document.getElementById("nameSection").classList.toggle("hide");
     // Reveal Chore List Selector 
-    document.getElementById("choreSelection").classList.toggle("hide");
+    document.getElementById("choreSelection").classList.remove("hide");
     // Inserts Title into HTML
     document.getElementById("choreSelectionTitle").innerHTML = nameOfGroup + " Chore Selection";
 
+    choreSelectionEvents();
+  }
+
+  function choreSelectionEvents(){
     ////////EVENT LISTENERS
     // adds custom chore
     document.getElementById("customChoreSelectionForm").addEventListener("submit",addCustomChore,false);
@@ -187,57 +224,70 @@ function startCreateChoreGroup() {
     document.getElementById("userSelectedChores").addEventListener("click",removeChore,false);
     // user hits continue button
     document.getElementById("preChoreListForm").addEventListener("submit",choresIntoArray,false);
-
-    ////////CREATE DOCUMENT FRAGMENT
-    //preliminary chore list area
-    var preChoreListContainer = document.getElementById("userSelectedChores");
-
-    function addCustomChore(evt) {
-      var customChore = document.getElementById("customChore").value;
-      if(customChore != "") {
-        addChore(customChore); 
-      }
-      //make the custom chore box blank 
-      document.getElementById("customChoreSelectionForm").reset();
-      //this prevents the submit button from reloading the page
-      evt.preventDefault();
-    }//end add custom chore
-
-    function addSelectedChore(evt) {
-      let choreList = document.getElementById("choreSelectionList");
-      let choreToAdd = choreList.selectedIndex;
-      let chore = choreList.options[choreToAdd].text;
-      addChore(chore);
-      evt.preventDefault();
-    }
-
-    function addChore(chore) {
-      let addToList = "<option value='" + chore + "'>" + chore + "</option>";
-      // take the document fragment we made and glue it onto the DOM \m/
-      preChoreListContainer.appendChild(createFragment(addToList));
-      preChoreListContainer.size += 1;
-    }
-
-    function removeChore(evt) {
-      let choreList = document.getElementById("userSelectedChores");
-      let choreToRemove = choreList.selectedIndex; 
-      choreList.options[choreToRemove].remove();
-      evt.preventDefault();
-      preChoreListContainer.size -= 1;
-    }
-
-    function choresIntoArray(evt) {
-      let choreList = document.getElementById("userSelectedChores");
-      let chore = "";
-      for(var x = 0; x < choreList.length; x++){
-        chore = choreList.options[x].text;
-        choreArray[x] = chore;
-      }
-      evt.preventDefault();
-      choreOptions();
-    }
-  }//<------------------- END Chore Selection  ---------------------
+    // user wants to go back to naming
+    document.getElementById("preChoreListForm").addEventListener("reset",backToAddActors,false);
+  }
     
+  function addCustomChore(evt) {
+    var customChore = document.getElementById("customChore").value;
+    if(customChore != "") {
+      addChoreToList(customChore); 
+    }
+    //make the custom chore box blank 
+    document.getElementById("customChoreSelectionForm").reset();
+    //this prevents the submit button from reloading the page
+    evt.preventDefault();
+  }//end add custom chore
+
+  function addSelectedChore(evt) {
+    let choreList = document.getElementById("choreSelectionList");
+    let choreToAdd = choreList.selectedIndex;
+    let chore = choreList.options[choreToAdd].text;
+    addChoreToList(chore);
+    evt.preventDefault();
+  }
+
+  function addChoreToList(chore) {
+    let addToList = "<option value='" + chore + "'>" + chore + "</option>";
+    var preChoreListContainer = document.getElementById("userSelectedChores");
+    preChoreListContainer.appendChild(createFragment(addToList));
+    preChoreListContainer.size += 1;
+  }
+
+  function removeChore(evt) {
+    let choreList = document.getElementById("userSelectedChores");
+    let choreToRemove = choreList.selectedIndex; 
+    choreList.options[choreToRemove].remove();
+    evt.preventDefault();
+    var preChoreListContainer = document.getElementById("userSelectedChores");
+    preChoreListContainer.size -= 1;
+  }
+
+  function choresIntoArray(evt) {
+    let choreList = document.getElementById("userSelectedChores");
+    let chore = "";
+    for(var x = 0; x < choreList.length; x++){
+      chore = choreList.options[x].text;
+      choreArray[x] = chore;
+    }
+    evt.preventDefault();
+    document.getElementById("choreSelection").classList.add("hide");
+    choreOptions();
+  }
+
+  function backToAddActors(evt){
+    //hide chore Selection
+    document.getElementById("choreSelection").classList.add("hide");
+    // delete old name container
+    let deleteNameSection = document.getElementById("nameSectionForm").querySelectorAll('.namingOfActors');
+    for(let i = 0; i < deleteNameSection.length; i++){
+      deleteNameSection[i].remove();
+    }
+    addActors();
+  }
+
+  //<------------------- END Chore Selection  ---------------------
+
 
   ////////////////////////////////////////////////
   /*      CHORE OPTIONS
@@ -245,16 +295,21 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////  
   function choreOptions() {
-    //////CSS hides/reveals divs
-    // hide Chore selction 
-    document.getElementById("choreSelection").classList.toggle("hide");
     // Reveal Chore Options Section 
-    document.getElementById("choreOptionsSection").classList.toggle("hide");
+    document.getElementById("choreOptionsSection").classList.remove("hide");
+    createChoreForms();
+    choreOptionEvents();
+    
+  }//<------------------- END Chore Options  ---------------------
 
-    //////EVENT LISTENER - user hits continue
+  function choreOptionEvents(){
+    // EVENT LISTENERs
     document.getElementById("choreOptionsSubmit").addEventListener("click",checkForms,false);
+    document.getElementById("choreOptionsBack").addEventListener("click",backToChoreSelection,false);
+  }
 
-    //////////DOCUMENT FRAGMENT NEEDS CONTAINER
+  function createChoreForms(){
+     // DOCUMENT FRAGMENT NEEDS CONTAINER
     var choreOptionsFormsContainer = document.getElementById("choreOptionsForms");
     
     // set min day to current day
@@ -277,11 +332,11 @@ function startCreateChoreGroup() {
     //1. CHORE
     var form2 = "<form id='choreForm";
     //3. INDEX 
-    var form4 = "' name='' class=''>Due Date <input type='date' id='choreDate";
+    var form4 = "' name='' class='choreOption'>Due Date <input type='date' id='choreDate";
     //5. INDEX
     var form6 = "' name='' min='";
     //7. TODAYS DATE
-    var form8 = "' class='selectedChoreDate' required> Assign <select id='choreAssign";
+    var form8 = "' class='selectChoreDate' required> Assign <select id='choreAssign";
     //9. INDEX
     var form10 = "'>";
     //11. OPTIONS 
@@ -292,6 +347,7 @@ function startCreateChoreGroup() {
     //this puts all the actors into the forms 
     var formpart2 = ["<option value='random'>Randomly</option>"];
     var formpart4 = ["<option value='null'>none</option>"];
+
     for(var y = 0; y < actorsArray.length; y++){
       let option = "<option value='actor" + y + "'>" + actorsArray[y].name + "</option>";
       formpart2 += option; 
@@ -301,57 +357,64 @@ function startCreateChoreGroup() {
 
     // create forms
     for(var x = 0; x < choreArray.length; x++){
-      let chore = "<div>" + choreArray[x];
+      let chore = "<div class='choreOption'>" + choreArray[x];
       let formpart1 = chore + form2 + x + form4 + x + form6 + todaysDate + form8 + x + form10;
       let formpart3 = form12 + x + form14;
       var completeform = formpart1 + formpart2 + formpart3 + formpart4 + formpart5;
       choreOptionsFormsContainer.appendChild(createFragment(completeform));
     } 
-    
-    function checkForms(evt) {
-      //validate forms
-      var allGood = true;
-      for(let x = 0; x < choreArray.length; x++){
-        let choreAssignee = document.getElementById("choreAssign" + x);
-        let choreExemptee = document.getElementById("choreExempt" + x);
-        let dueDate = document.getElementById("choreDate" + x);
-        if(dueDate.value == ""){
-            allGood = false;
-            if(!dueDate.classList.contains("highlightRed")){
-              dueDate.classList.toggle("highlightRed");
-            }
-        }else{
-          if(dueDate.classList.contains("highlightRed")){
+  }
+
+  function checkForms(evt) {
+    //validate forms
+    var allGood = true;
+    for(let x = 0; x < choreArray.length; x++){
+      let choreAssignee = document.getElementById("choreAssign" + x);
+      let choreExemptee = document.getElementById("choreExempt" + x);
+      let dueDate = document.getElementById("choreDate" + x);
+      if(dueDate.value == ""){
+          allGood = false;
+          if(!dueDate.classList.contains("highlightRed")){
             dueDate.classList.toggle("highlightRed");
           }
+      }else{
+        if(dueDate.classList.contains("highlightRed")){
+          dueDate.classList.toggle("highlightRed");
         }
-        if(choreExemptee.value != "null"){
-          if(choreAssignee.value === choreExemptee.value){
-            allGood = false;
-            if(!choreAssignee.classList.contains("highlightRed")){
-              choreAssignee.classList.toggle("highlightRed");
-            }
-            if(!choreExemptee.classList.contains("highlightRed")){
-              choreExemptee.classList.toggle("highlightRed");
-            }
-          }else{
-            if(choreAssignee.classList.contains("highlightRed")){
-              choreAssignee.classList.toggle("highlightRed");
-            }
-            if(choreExemptee.classList.contains("highlightRed")){
-              choreExemptee.classList.toggle("highlightRed");
-            }
+      }
+      if(choreExemptee.value != "null"){
+        if(choreAssignee.value === choreExemptee.value){
+          allGood = false;
+          if(!choreAssignee.classList.contains("highlightRed")){
+            choreAssignee.classList.toggle("highlightRed");
+          }
+          if(!choreExemptee.classList.contains("highlightRed")){
+            choreExemptee.classList.toggle("highlightRed");
+          }
+        }else{
+          if(choreAssignee.classList.contains("highlightRed")){
+            choreAssignee.classList.toggle("highlightRed");
+          }
+          if(choreExemptee.classList.contains("highlightRed")){
+            choreExemptee.classList.toggle("highlightRed");
           }
         }
-      }// end for
-      if(allGood){
-        document.getElementById("choreOptionsSection").classList.toggle("hide");
-        //evt.preventDefault();
-        assignChores();
       }
-    }//end checkForms
-  }//<------------------- END Chore Options  ---------------------
+    }// end for
+    if(allGood){
+      document.getElementById("choreOptionsSection").classList.add("hide");
+      //evt.preventDefault();
+      assignChores();
+    }
+  }//end checkForms
 
+  function backToChoreSelection(evt){
+    var deleteChoreOptions = document.getElementById("choreOptionsForms").querySelectorAll('.choreOption');
+    for(let i = 0; i < deleteChoreOptions.length; i++){
+      deleteChoreOptions[i].remove();
+    }
+    choreSelection();
+  }
 
   ////////////////////////////////////////////////
   /*      ASSIGN CHORES
@@ -365,110 +428,99 @@ function startCreateChoreGroup() {
     makeChores();
     distributionCheck();
     displayChoreAssignments();  
-    
+  }
 
-    function makeChores() {
-      for(var i = 0; i < choreArray.length; i++){
-        // create choreWithInfo objects
-        var chore = Object.create(ChoreWithInfo);
-        chore.name = choreArray[i];
-        chore.date = document.getElementById("choreDate" + i).value;
-        chore.assigned = document.getElementById("choreAssign" + i).value;
-        chore.exempt = document.getElementById("choreExempt" + i).value;
-        // actors manully assigned
-        if(chore.assigned != "random"){
-          // get index of assigned actor 
-          let index = chore.assigned.substr(5);
+  function makeChores() {
+    for(var i = 0; i < choreArray.length; i++){
+      // create choreWithInfo objects
+      var chore = Object.create(ChoreWithInfo);
+      chore.name = choreArray[i];
+      chore.date = document.getElementById("choreDate" + i).value;
+      chore.assigned = document.getElementById("choreAssign" + i).value;
+      chore.exempt = document.getElementById("choreExempt" + i).value;
+      // actors manully assigned
+      if(chore.assigned != "random"){
+        // get index of assigned actor 
+        let index = chore.assigned.substr(5);
+        chore.assigned = actorsArray[index];
+        chore.manuallyAssigned = true;
+        chore.assigned.chores += 1;
+        actorsArray[index].chores += 1;
+      }else{
+        // chore assigned randomly and has exemption 
+        if(chore.exempt != "null"){
+          // get index of exemption and send to randomlyAssignChore
+          let exemptIndex = chore.exempt.substr(5);
+          let index = randomlyAssignChore(exemptIndex);
           chore.assigned = actorsArray[index];
-          chore.manuallyAssigned = true;
+          chore.exempt = actorsArray[exemptIndex].name;
           chore.assigned.chores += 1;
           actorsArray[index].chores += 1;
         }else{
-          // chore assigned randomly and has exemption 
-          if(chore.exempt != "null"){
-            // get index of exemption and send to randomlyAssignChore
-            let exemptIndex = chore.exempt.substr(5);
-            let index = randomlyAssignChore(exemptIndex);
-            chore.assigned = actorsArray[index];
-            chore.exempt = actorsArray[exemptIndex].name;
-            chore.assigned.chores += 1;
-            actorsArray[index].chores += 1;
-          }else{
-            // chore assigned randomly w/ no exemptions
-            let index = randomlyAssignChore(666); //666 lets randAssignChore know there are no exemptions
-            chore.assigned = actorsArray[index];
-            chore.assigned.chores += 1; 
-            actorsArray[index].chores += 1;                  
-          }
+          // chore assigned randomly w/ no exemptions
+          let index = randomlyAssignChore(666); //666 lets randAssignChore know there are no exemptions
+          chore.assigned = actorsArray[index];
+          chore.assigned.chores += 1; 
+          actorsArray[index].chores += 1;                  
         }
-        choreArray[i] = chore;
-      } 
-    }// end make chores
+      }
+      choreArray[i] = chore;
+    } 
+  }// end make chores
 
-    function randomlyAssignChore(exemption) {
-      var randomNum;
-      if(exemption != 666){ 
-        do{
-          randomNum = Math.floor(Math.random() * (numberOfActors));
-        }while(randomNum == exemption);
-        return randomNum;
-      }else{
+  function randomlyAssignChore(exemption) {
+    var randomNum;
+    if(exemption != 666){ 
+      do{
         randomNum = Math.floor(Math.random() * (numberOfActors));
-        return randomNum;
-      }
+      }while(randomNum == exemption);
+      return randomNum;
+    }else{
+      randomNum = Math.floor(Math.random() * (numberOfActors));
+      return randomNum;
     }
-    /*mega random number generator from
-    P. L'Ecuyer: A table of Linear Congruential Generators of different sizes and good lattice structure, April 30 1997.*/
-    function mulberry32(a) {
-      return function() {
-        var t = a += 0x6D2B79F5;
-        t = Math.imul(t ^ t >>> 15, t | 1);
-        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-        return ((t ^ t >>> 14) >>> 0) / 4294967296;
-      }
-    }
+  }
 
-    function distributionCheck(){
-      for(var p = 0; p < actorsArray.length; p++){
-        var max = actorsArray[p].chores;
-        var maxIndex = p;
-        var min = actorsArray[p].chores;
-        var minIndex = p;
-        for(var x = 0; x < actorsArray.length; x++){
-          if(actorsArray[x].chores >= max){
-            max = actorsArray[x].chores;
-            maxIndex = x;
-            //console.log("max = " + max);
-            //console.log("maxIndex = " + maxIndex);
-          }
-          if(actorsArray[x].chores <= min){
-            min = actorsArray[x].chores;
-            minIndex = x;
-            //console.log("min = " + min);
-            //console.log("minIndex = " + minIndex);
-          }
-          //console.log("inner loop " + x + " of " + actorsArray.length);
+  function distributionCheck(){
+    for(var p = 0; p < actorsArray.length; p++){
+      var max = actorsArray[p].chores;
+      var maxIndex = p;
+      var min = actorsArray[p].chores;
+      var minIndex = p;
+      for(var x = 0; x < actorsArray.length; x++){
+        if(actorsArray[x].chores >= max){
+          max = actorsArray[x].chores;
+          maxIndex = x;
+          //console.log("max = " + max);
+          //console.log("maxIndex = " + maxIndex);
         }
-        if(max >= 2){
-          for(let y = 0; y < choreArray.length; y++){
-            if((actorsArray[maxIndex].name == choreArray[y].assigned.name) && 
-               (choreArray[y].manuallyAssigned == false) && 
-               (choreArray[y].exempt != actorsArray[minIndex].name)) 
-            {
-              choreArray[y].assigned = actorsArray[minIndex];
-              choreArray[y].assigned.chores += 1;
-              actorsArray[minIndex].chores += 1;
-              actorsArray[maxIndex].chores -= 1;
-              //console.log("Switching " + maxIndex + "with " + minIndex);
-              break;
-            }
-          }
+        if(actorsArray[x].chores <= min){
+          min = actorsArray[x].chores;
+          minIndex = x;
+          //console.log("min = " + min);
+          //console.log("minIndex = " + minIndex);
         }
-        //console.log("outer loop " + p + " of " + actorsArray.length);
+        //console.log("inner loop " + x + " of " + actorsArray.length);
       }
-    }// end distributionCheck
-    //////////////////////////////////////////////////////////// 
-  }//<------------------- END Assign Chores ---------------------
+      if(max >= 2){
+        for(let y = 0; y < choreArray.length; y++){
+          if((actorsArray[maxIndex].name == choreArray[y].assigned.name) && 
+             (choreArray[y].manuallyAssigned == false) && 
+             (choreArray[y].exempt != actorsArray[minIndex].name)) 
+          {
+            choreArray[y].assigned = actorsArray[minIndex];
+            choreArray[y].assigned.chores += 1;
+            actorsArray[minIndex].chores += 1;
+            actorsArray[maxIndex].chores -= 1;
+            //console.log("Switching " + maxIndex + "with " + minIndex);
+            break;
+          }
+        }
+      }
+      //console.log("outer loop " + p + " of " + actorsArray.length);
+    }
+  }// end distributionCheck
+  //<------------------- END Assign Chores ---------------------
 
 
   ////////////////////////////////////////////////
@@ -497,7 +549,6 @@ function startCreateChoreGroup() {
             //Due Date
     var html9 = "</div><div class='completedItem'>";
             //Completed
-    var html11= "</div>";
     var htmlPart3= "</div></div></div><br>";
 
     for(var x = 0; x < actorsArray.length; x++){
@@ -508,7 +559,7 @@ function startCreateChoreGroup() {
       var htmlPart2 = "";
       for(var i = 0; i < choreArray.length; i++){
         if(choreArray[i].assigned.name == actorName){
-          htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9 + "Incomplete" + html11;
+          htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9 + "Incomplete";
         }
       }
       let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
