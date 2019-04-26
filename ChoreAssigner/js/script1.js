@@ -428,7 +428,8 @@ function startCreateChoreGroup() {
 
     makeChores();
     distributionCheck();
-    displayChoreAssignments();  
+    displayChoreAssignments(); 
+    //assignChoresEvents(); 
   }
 
   function makeChores() {
@@ -534,11 +535,13 @@ function startCreateChoreGroup() {
   */
   ////////////////////////////////////////////////
   function displayChoreAssignments() {
+    // reveal assign chores section
+    document.getElementById("assignedChoresSection").classList.remove("hide");
     //////////DOCUMENT FRAGMENT NEEDS CONTAINER
     var assignedChoreListContainer = document.getElementById("assignedChoresList");
     /*
       EDITTING CSS - please carefully go in and add classes with SINGLE quotes 
-                   - feel free to rename the classes to whatever you want
+                   - do not remove 'actorContainer' class
     */
     var html1 = "<div class='actorContainer'><div class='nameRating'><div class='nameItem'>";
             //Actor Name
@@ -568,7 +571,35 @@ function startCreateChoreGroup() {
       assignedChoreListContainer.appendChild(createFragment(fullActorContainer));
     }
   }//<------------------- END Display Chore Assignments ---------------------
+
+  function assignChoresEvents(){
+    document.getElementById("assignedChoresListBack").addEventListener('click',backToChoreOptions,false);
+    // some other code that will go to processChoreAssignments
+  }
+
+  function backToChoreOptions(evt) {
+    var deleteAssignedChoreList = document.getElementById("assignedChoresList").querySelectorAll(".actorContainer");
+    for(let i = 0; i < deleteAssignedChoreList.length; i++){
+      deleteAssignedChoreList[i].remove();
+    }
+    document.getElementById("assignedChoresSection").classList.add("hide");
+    choreOptions();
+  }
+
 }//<**************----- END Create Chore Group  ------****************
+
+
+
+////////////////////////////////////////////////
+/*      Process Chore Assignments
+        some process for sending forms to email or to backend
+*/
+////////////////////////////////////////////////
+function processChoreAssignments(){
+  // CODE CODE
+}
+
+//<-------------------- END Process Chore Assignments--------------
 
 
 ////////////////////////////////////////////////
