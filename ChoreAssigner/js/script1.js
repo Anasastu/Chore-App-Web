@@ -153,7 +153,7 @@ function startCreateChoreGroup() {
         /*
         EDITTING CSS 
         - please leave any ids alone, they are required for the script to work
-        - classes can freely be added/ changed, just use SINGLE quotes
+        - Leave Ids alone, do not delete any classes, you can add class just use SINGLE quotes
         */
         //create name input for each actor 
         var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
@@ -300,7 +300,7 @@ function startCreateChoreGroup() {
     createChoreForms();
     choreOptionEvents();
     
-  }//<------------------- END Chore Options  ---------------------
+  }
 
   function choreOptionEvents(){
     // EVENT LISTENERs
@@ -327,7 +327,7 @@ function startCreateChoreGroup() {
     /*
       EDITTING CSS
       - please leave any ids alone, they are required for the script to work
-      - classes can freely be added/ changed, just use SINGLE quotes
+      - classes can freely be added, DO NOT DELETE 'choreform' class
     */
     //1. CHORE
     var form2 = "<form id='choreForm";
@@ -415,6 +415,7 @@ function startCreateChoreGroup() {
     }
     choreSelection();
   }
+  //<------------------- END Chore Options  ---------------------
 
   ////////////////////////////////////////////////
   /*      ASSIGN CHORES
