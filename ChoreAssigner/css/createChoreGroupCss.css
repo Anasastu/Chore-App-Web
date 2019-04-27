@@ -98,11 +98,27 @@ body {
     background: rgba(205, 92, 92, 0.7);
 }
 
+/* Set up the back button */
+#numOfActorsSelectionForm input[type="reset"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#numOfActorsSelectionForm input[type="reset"]:hover {
+    cursor: pointer;
+    background: rgba(205, 92, 92, 0.7);
+}
+
 /* Set up the dropdown list */
 #numOfActors {
     width: 200px;
     height: 40px;
     border: 2px solid #CD5C5C;
+    margin-top: 10px;
 }
 
 /* Set up the nameSection */
