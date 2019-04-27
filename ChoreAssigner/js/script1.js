@@ -165,15 +165,9 @@ function startCreateChoreGroup() {
           nameFragment.appendChild(div.firstChild);
         }
       }//end for
-      // take the document fragment we made and glue it onto the DOM \m/
+      // take the document fragment and put in doc before buttons
       nameContainer.insertBefore(nameFragment, buttons);
-      // give user back button
-     //nameContainer.appendChild(createFragment("<input type='reset' value='Back' class='namingOfActors'>"));
-      // give user a submit button
-      //nameContainer.appendChild(createFragment("<input type='submit' value='Continue' class='namingOfActors'>"));
-
-      
-      //this prevents the submit button from reloading the page
+    
       if(evt){
         evt.preventDefault();
       }
@@ -184,18 +178,19 @@ function startCreateChoreGroup() {
     }
   }//<------------------- END Add Actors  ---------------------
 
- function actorsIntoArray(evt) {
+  function actorsIntoArray(evt) {
+    actorsArray = [];
     var x = 1;
     for(x = 1; x <= numberOfActors; x++) {
       let person = Object.create(Actor);
       person.name = document.getElementById("actorNaming" + x).value;
       actorsArray[x - 1] = person;
     }
-    //this prevents the submit button from reloading the page
-    evt.preventDefault();
-     // Hide Name Section
-    document.getElementById("nameSection").classList.add("hide");
-    choreSelection();
+    if(evt){
+      document.getElementById("nameSection").classList.add("hide");
+      choreSelection();
+      evt.preventDefault();
+    }
   }//end actorsIntoArray
 
   //////////////////////////////////////////////// 
@@ -248,7 +243,7 @@ function startCreateChoreGroup() {
   }
 
   function addChoreToList(chore) {
-    let addToList = "<option value='" + chore + "'>" + chore + "</option>";
+    let addToList = "<option value='" + chore + "' class=''>" + chore + "</option>";
     var preChoreListContainer = document.getElementById("userSelectedChores");
     preChoreListContainer.appendChild(createFragment(addToList));
     preChoreListContainer.size += 1;
@@ -266,13 +261,16 @@ function startCreateChoreGroup() {
   function choresIntoArray(evt) {
     let choreList = document.getElementById("userSelectedChores");
     let chore = "";
-    for(var x = 0; x < choreList.length; x++){
+    var x = 0;
+    for(x = 0; x < choreList.length; x++){
       chore = choreList.options[x].text;
       choreArray[x] = chore;
     }
-    evt.preventDefault();
-    document.getElementById("choreSelection").classList.add("hide");
-    choreOptions();
+    if(evt){
+      evt.preventDefault();
+      document.getElementById("choreSelection").classList.add("hide");
+      choreOptions();
+    }
   }
 
   function backToAddActors(evt){
@@ -283,6 +281,7 @@ function startCreateChoreGroup() {
     for(let i = 0; i < deleteNameSection.length; i++){
       deleteNameSection[i].remove();
     }
+    choreArray = [];
     addActors();
   }
 
@@ -347,8 +346,8 @@ function startCreateChoreGroup() {
     //this puts all the actors into the forms 
     var formpart2 = ["<option value='random'>Randomly</option>"];
     var formpart4 = ["<option value='null'>none</option>"];
-
-    for(var y = 0; y < actorsArray.length; y++){
+    var y = 0;
+    for(y = 0; y < actorsArray.length; y++){
       let option = "<option value='actor" + y + "'>" + actorsArray[y].name + "</option>";
       formpart2 += option; 
       formpart4 += option;
@@ -356,7 +355,8 @@ function startCreateChoreGroup() {
     var formpart5 = "</select></form></div>";
 
     // create forms
-    for(var x = 0; x < choreArray.length; x++){
+    var x = 0;
+    for(x = 0; x < choreArray.length; x++){
       let chore = "<div class='choreOption'>" + choreArray[x];
       let formpart1 = chore + form2 + x + form4 + x + form6 + todaysDate + form8 + x + form10;
       let formpart3 = form12 + x + form14;
@@ -413,6 +413,8 @@ function startCreateChoreGroup() {
     for(let i = 0; i < deleteChoreOptions.length; i++){
       deleteChoreOptions[i].remove();
     }
+    document.getElementById("choreOptionsSection").classList.add("hide");
+    choreArray = [];
     choreSelection();
   }
   //<------------------- END Chore Options  ---------------------
@@ -429,11 +431,12 @@ function startCreateChoreGroup() {
     makeChores();
     distributionCheck();
     displayChoreAssignments(); 
-    //assignChoresEvents(); 
+    assignChoresEvents(); 
   }
 
   function makeChores() {
-    for(var i = 0; i < choreArray.length; i++){
+    var i = 0;
+    for(i = 0; i < choreArray.length; i++){
       // create choreWithInfo objects
       var chore = Object.create(ChoreWithInfo);
       chore.name = choreArray[i];
@@ -484,7 +487,8 @@ function startCreateChoreGroup() {
   }
 
   function distributionCheck(){
-    for(var p = 0; p < actorsArray.length; p++){
+    var p = 0;
+    for(p = 0; p < actorsArray.length; p++){
       var max = actorsArray[p].chores;
       var maxIndex = p;
       var min = actorsArray[p].chores;
@@ -553,15 +557,16 @@ function startCreateChoreGroup() {
             //Due Date
     var html9 = "</div><div class='completedItem'>";
             //Completed
-    var htmlPart3= "</div></div></div><br>";
-
-    for(var x = 0; x < actorsArray.length; x++){
+    var htmlPart3= "</div></div><br></div>";
+    var x = 0;
+    for(x = 0; x < actorsArray.length; x++){
       var actor = actorsArray[x];
       var actorName = actor.name;
       var actorRating = actor.rating;
       var htmlPart1 = html1 + actorName + html3 + actorRating;
       var htmlPart2 = "";
-      for(var i = 0; i < choreArray.length; i++){
+      var i = 0;
+      for(i = 0; i < choreArray.length; i++){
         if(choreArray[i].assigned.name == actorName){
           htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9 + "Incomplete";
         }
@@ -582,8 +587,11 @@ function startCreateChoreGroup() {
     for(let i = 0; i < deleteAssignedChoreList.length; i++){
       deleteAssignedChoreList[i].remove();
     }
+    actorsIntoArray();
     document.getElementById("assignedChoresSection").classList.add("hide");
-    choreOptions();
+    document.getElementById("choreOptionsSection").classList.remove("hide");
+    choresIntoArray();
+    choreOptionEvents();
   }
 
 }//<**************----- END Create Chore Group  ------****************
