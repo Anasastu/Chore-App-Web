@@ -125,7 +125,7 @@ body {
 #nameSection {
     margin: 0px auto;
     width: 320px;
-    height: 420px;
+    height: 500px;
     background: rgba(0, 153, 204, 0.5);
     text-align: center;
     box-shadow: 5px 10px;
@@ -158,6 +158,23 @@ body {
 
 /* Change the color of the button when hovering over it with your mouse */
 #nameSection input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Set up the nameSection back button */
+#nameSection input[type="reset"] {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid #CD5C5C;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Change the color of the button when hovering over it with your mouse */
+#nameSection input[type="reset"]:hover {
     cursor: pointer;
     background-color: #7FFFD4;
 }
