@@ -93,3 +93,31 @@ body {
 .icon {
     color: black;
 }
+
+/* Updated the width of the nav-bar to fit when the screen
+   size is 320px or less.
+*/
+@media screen and (max-width: 320px) {
+    #nav-bar {
+        width: 560px;
+    }
+}
+
+/* Updated the width of the nav-bar to fit when the screen
+   size is 375px or less.
+*/
+@media screen and (max-width: 375px) {
+    #nav-bar {
+        width: 560px;
+    }
+}
+
+/* Updated the width of the nav-bar to fit when the screen
+   size is 425px or less.
+*/
+@media screen and (max-width: 425px) {
+    #nav-bar {
+        width: 560px;
+    }
+    
+}
