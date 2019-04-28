@@ -241,3 +241,16 @@ body {
     text-align: center;
     line-height: 25px;
 }
+
+/* Set up the back button */
+#choreOptionsBack {
+    height: 30px;
+    border: 3px solid #CD5C5C;
+    font-weight: bold;
+}
+
+#choreOptionsBack:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #FFFFFF;
+}
