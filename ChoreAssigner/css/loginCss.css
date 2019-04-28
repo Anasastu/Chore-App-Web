@@ -21,14 +21,14 @@ body {
 
 #nav-bar li a {
     display: block;
-    color: white;
+    color: #FFFFFF;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 16px 20px 16px;
     text-decoration: none;
 }
 
 #nav-bar a:hover {
-    background-color: #ADD8E6;
+    color: #98FB98;
 }
 
 .icon {
@@ -116,4 +116,16 @@ body {
 .register-box input[type="submit"]:hover {
     cursor: pointer;
     background-color: #FAFAD2;
+}
+
+/* Resize the img in the nav-bar */
+#nav-bar img {
+    width: 100px;
+}
+
+/* When the screen size is 320px or less hide the logo on the navbar */
+@media screen and (max-width: 320px) {
+    #nav-bar img {
+        display: none;
+    }
 }
