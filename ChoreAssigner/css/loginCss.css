@@ -111,6 +111,7 @@ body {
     height: 30px;
     border-radius: 20px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .register-box input[type="submit"]:hover {
@@ -123,8 +124,58 @@ body {
     width: 100px;
 }
 
+/* Setup the background for the footer */
+#footer {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 150px;
+    color: #FFFFFF;
+}
+
+/* Setup the social media links */
+#socialLinks {
+    float: left;
+    font-size: 20px;
+}
+
+
+#socialLinks a {
+    color: #FF4500;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#socialLinks a:hover {
+    text-decoration: underline;
+    color: #98FB98;
+}
+
+/* Setup the getApp links */
+#getApp {
+    float: right;
+    font-size: 20px;
+}
+
+#getApp a {
+    color: #FFFF00;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#getApp a:hover {
+    text-decoration: underline;
+    color: #98FB98;
+}
+
 /* When the screen size is 320px or less hide the logo on the navbar */
 @media screen and (max-width: 320px) {
+    #nav-bar img {
+        display: none;
+    }
+}
+
+/* When the screen size is 375px or less hide the logo on the navbar */
+@media screen and (max-width: 375px) {
     #nav-bar img {
         display: none;
     }
