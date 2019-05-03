@@ -156,7 +156,7 @@ function startCreateChoreGroup() {
         - Leave Ids alone, do not delete any classes, you can add class just use SINGLE quotes
         */
         //create name input for each actor 
-        var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' required><br></div>";
+        var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' pattern='[A-Za-z\s]{2,18}' required><br></div>";
         //create a new div element
         var div = document.createElement('div');
         //put the nameInfo html into the div we just created
@@ -549,29 +549,32 @@ function startCreateChoreGroup() {
     */
     var html1 = "<div class='actorContainer'><div class='nameRating'><div class='nameItem'>";
             //Actor Name
-    var html3 ="</div><div class='ratingItem'>Rating = ";
+    var html3 ="</div>";
             //Rating
-    var html5 = "</div></div><div class='choreDueCompleted'><div class='choreItem'>";
+    var html5 = "</div><div class='choreDueCompleted'><div class='choreItem'>";
             //Chore
-    var html7 = "</div><div class='dueItem'>";
+    var html7 = "</div><div class='dueItem'> Due On ";
             //Due Date
-    var html9 = "</div><div class='completedItem'>";
-            //Completed
-    var htmlPart3= "</div></div><br></div>";
+    var html9 = "</div>" ;
+            //email
+    var htmlPart3= "</div><div class='emailForm'><form id='emailSendForm";
+            //form number
+    var htmlPart5 = "' action='' method='get'><input id='emailSendFormInput";
+            // form number
+    var htmlPart7 = "' type='text' name='email' placeholder='Enter Email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'><input type='submit' value='Send'><div class='ratingItem'></form></div><br></div></div>";
     var x = 0;
     for(x = 0; x < actorsArray.length; x++){
       var actor = actorsArray[x];
       var actorName = actor.name;
-      var actorRating = actor.rating;
-      var htmlPart1 = html1 + actorName + html3 + actorRating;
+      var htmlPart1 = html1 + actorName + html3;
       var htmlPart2 = "";
       var i = 0;
       for(i = 0; i < choreArray.length; i++){
         if(choreArray[i].assigned.name == actorName){
-          htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9 + "Incomplete";
+          htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9;
         }
       }
-      let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
+      let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3 + x + htmlPart5 + x + htmlPart7;
       // take the document fragment we made and glue it onto the DOM \m/
       assignedChoreListContainer.appendChild(createFragment(fullActorContainer));
     }
@@ -579,6 +582,7 @@ function startCreateChoreGroup() {
 
   function assignChoresEvents(){
     document.getElementById("assignedChoresListBack").addEventListener('click',backToChoreOptions,false);
+    
     // some other code that will go to processChoreAssignments
   }
 
