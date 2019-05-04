@@ -96,7 +96,9 @@ body {
    mouse is hovering */
 #numOfActorsSelectionForm input[type="submit"]:hover {
     cursor: pointer;
-    background: rgba(205, 92, 92, 0.7);
+    border: 2px solid #000000;
+    color: #FFFFFF;
+    background-color: #B71C1C;
 }
 
 /* Set up the back button */
@@ -109,9 +111,12 @@ body {
     font-weight: bold;
 }
 
+/* Change the color of the button when mouse is hovering */
 #numOfActorsSelectionForm input[type="reset"]:hover {
     cursor: pointer;
-    background: rgba(205, 92, 92, 0.7);
+    border: 2px solid #000000;
+    color: #FFFFFF;
+    background-color: #B71C1C;
 }
 
 /* Set up the dropdown list */
