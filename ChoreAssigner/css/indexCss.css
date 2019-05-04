@@ -2,6 +2,7 @@
 
 body {
     margin: 0px auto;
+    background-color: #95A5A6;
 }
 
 /* Setup the logo */
@@ -33,11 +34,16 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.8);
 }
 
 #nav-bar li {
     float: left;
+    border-right: 1px solid #FFFFFF;
+    height: 50px;
+}
+
+#nav-bar li:last-child {
+    border-right: none;
 }
 
 #nav-bar li a {
@@ -66,7 +72,7 @@ body {
     height: 100px;
     text-align: center;
     line-height: 80px;
-    border: 3px solid black;
+    border: 3px solid #000000;
     margin: 5px;
     font-weight: bold;
     font-size: 14px;
@@ -91,7 +97,74 @@ body {
 
 /* Icons next to the links */
 .icon {
-    color: black;
+    color: #000000;
+}
+
+/* Setup the foooter */
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* social media icons and app icons */
+.icons {
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+/* socail link header */
+#socialLinks h4 {
+    padding-left: 50px;
+}
+
+/* social links list */
+#socialLinks ul {
+    list-style-type: none;
+    
+}
+
+#socialLinks li {
+    float: left;
+}
+
+#socialLinks a {
+    display: block;
+    padding: 8px;
+}
+
+#socialLinks a:hover {
+    cursor: pointer;
+}
+
+/* Float the app div to the right */
+#app {
+    float: right;
+}
+
+/* fix the app header to align with the social link header */
+#app h4 {
+    margin-top: -40px;
+    margin-left: 40px;
+}
+
+/* Setup the app ul */
+#app ul {
+    list-style-type: none;
+    margin-right: 30px
+}
+
+/* Float the app li to the right */
+#app li {
+    float: right;
+}
+
+#app a {
+    display: block;
+    padding: 8px;
 }
 
 /* Updated the width of the nav-bar to fit when the screen
