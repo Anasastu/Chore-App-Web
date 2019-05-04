@@ -35,14 +35,14 @@ body {
 
 #navbar li a {
     display: block;
-    color: #FFFFFF;
+    color: #B71C1C;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
 #navbar a:hover {
-    background-color: #ADD8E6;
+   background-color: #FFFFFF;
 }
 
 /* Center the selectGroup-box */
@@ -74,6 +74,7 @@ body {
 .selectGroup-box input[type="submit"]:hover {
     cursor: pointer;
     background-color: #B22222;
+    color: #FFFFFF;
 }
 
 /* Center the numOfActorsSelectionForm */
