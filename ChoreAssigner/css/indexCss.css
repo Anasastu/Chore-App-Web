@@ -138,6 +138,7 @@ body {
 
 #socialLinks a:hover {
     cursor: pointer;
+    background-color: #D81B60;
 }
 
 /* Float the app div to the right */
@@ -165,6 +166,11 @@ body {
 #app a {
     display: block;
     padding: 8px;
+}
+
+#app a:hover {
+    cursor: pointer;
+    background-color: #D81B60;
 }
 
 /* Updated the width of the nav-bar to fit when the screen
