@@ -244,8 +244,15 @@ body {
 
 /* Set up assignedChoresSection */
 #assignedChoresSection {
+    margin: 0px auto;
+    background-color: #FFFFFF;
     text-align: center;
     line-height: 25px;
+    color: #000000;
+    border: 4px solid #D81B60;
+    width: 300px;
+    box-shadow: 5px 10px #D81B60;
+    padding: 10px;
 }
 
 /* Set up the back button */
