@@ -9,6 +9,7 @@ body {
 h2 {
     text-align: center;
     color: #FFFFFF;
+    margin-top: 5px;
 }
 
 /* Set style for the navigation bar */
@@ -36,6 +37,7 @@ h2 {
     color: #98FB98;
 }
 
+
 .icon {
     color: #FFFFFF;
 }
@@ -46,8 +48,8 @@ h2 {
     width: 320px;
     height: 420px;
     background: rgba(0, 0, 0, 0.5);
-    margin-top: 50px;
     border: 2px solid #FFFFFF;
+    margin-top: -15px;
 }
 
 
@@ -101,6 +103,7 @@ h2 {
 
 .register-box h4 {
     color: #FFFFFF;
+    margin-top: 5px;
 }
 
 .register-box input[type="text"] {
@@ -108,7 +111,8 @@ h2 {
     height: 30px;
     border: none;
     outline: none;
-    margin-bottom: 10px;
+    position: relative;
+    top: -15px;
 }
 
 .register-box input[type="submit"] {
@@ -116,7 +120,8 @@ h2 {
     height: 30px;
     border-radius: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    position: relative;
+    top: -5px;
 }
 
 .register-box input[type="submit"]:hover {
@@ -129,47 +134,77 @@ h2 {
     width: 100px;
 }
 
-/* Setup the background for the footer */
-#footer {
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: 150px;
+/* social media icons and app icons */
+.icons {
+    font-size: 20px;
     color: #FFFFFF;
 }
 
-/* Setup the social media links */
-#socialLinks {
-    float: left;
-    font-size: 20px;
+/* socail link header */
+#socialLinks h4 {
+    padding-left: 50px;
 }
 
+/* social links list */
+#socialLinks ul {
+    list-style-type: none;
+    
+}
+
+#socialLinks li {
+    float: left;
+}
 
 #socialLinks a {
-    color: #FF4500;
-    text-decoration: none;
-    padding: 10px;
+    display: block;
+    padding: 8px;
 }
 
 #socialLinks a:hover {
-    text-decoration: underline;
-    color: #98FB98;
+    cursor: pointer;
+    background-color: #D81B60;
 }
 
-/* Setup the getApp links */
-#getApp {
+/* Setup the foooter */
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Float the app div to the right */
+#app {
     float: right;
-    font-size: 20px;
 }
 
-#getApp a {
-    color: #FFFF00;
-    text-decoration: none;
-    padding: 10px;
+/* fix the app header to align with the social link header */
+#app h4 {
+    margin-top: -40px;
+    margin-left: 40px;
 }
 
-#getApp a:hover {
-    text-decoration: underline;
-    color: #98FB98;
+/* Setup the app ul */
+#app ul {
+    list-style-type: none;
+    margin-right: 30px
+}
+
+/* Float the app li to the right */
+#app li {
+    float: right;
+}
+
+#app a {
+    display: block;
+    padding: 8px;
+}
+
+#app a:hover {
+    cursor: pointer;
+    background-color: #D81B60;
 }
 
 
