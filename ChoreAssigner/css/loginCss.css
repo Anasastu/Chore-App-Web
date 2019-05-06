@@ -17,6 +17,8 @@ body {
 
 #nav-bar li {
     float: left;
+    border-left: 1px solid #FFFFFF;
+    height: 60px;
 }
 
 #nav-bar li a {
@@ -133,12 +135,13 @@ body {
 
 /* socail link header */
 #socialLinks h4 {
-    padding-left: 50px;
+    padding-left: 5px;
 }
 
 /* social links list */
 #socialLinks ul {
     list-style-type: none;
+    margin-left: -40px;
     
 }
 
@@ -203,6 +206,21 @@ body {
     #nav-bar img {
         display: none;
     }
+    
+    #nav-bar {
+        width: 102%;
+    }
+    
+    #footer {
+        position: static;
+        background-color: transparent;
+    }
+    
+    #socialLinks ul {
+        list-style-type: none;
+        margin-left: -40px;
+    }
+    
 }
 
 /* When the screen size is 375px or less hide the logo on the navbar */
