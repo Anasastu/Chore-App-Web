@@ -35,13 +35,14 @@ body {
     color: #FFFFFF;
 }
 
+
 /* Set up the background for the login-box div */
 .login-box {
     margin: 0px auto;
     width: 320px;
     height: 420px;
     background: rgba(0, 0, 0, 0.5);
-    margin-top: 50px;
+    margin-top: 10px;
     border: 2px solid #FFFFFF;
 }
 
@@ -196,7 +197,6 @@ body {
     cursor: pointer;
     background-color: #D81B60;
 }
-
 
 /* When the screen size is 320px or less hide the logo on the navbar */
 @media screen and (max-width: 320px) {
