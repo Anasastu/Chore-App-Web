@@ -28,6 +28,12 @@ body {
     margin:0px auto;
 }
 
+#nav-bar {
+    width: 100%;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
 /* Set style for the navigation bar */
 #nav-bar ul {
     list-style-type: none;
@@ -39,7 +45,7 @@ body {
 #nav-bar li {
     float: left;
     border-right: 1px solid #FFFFFF;
-    height: 50px;
+    height: 45px;
 }
 
 #nav-bar li:last-child {
@@ -55,7 +61,7 @@ body {
 }
 
 #nav-bar a:hover {
-    background-color: #ADD8E6;
+    background-color: #C2185B;
 }
 
 /* Setup the flexbox for the two links */
@@ -84,13 +90,13 @@ body {
 }
 
 .flex-container a:hover {
-    color: #2980B9;
+    color: #C2185B;
     text-decoration: underline;
     background-color: transparent;
 }
 
 .flex-container a:visited {
-    color: #2980B9;
+    color: #BBDEFB;
     background-color: transparent;
     text-decoration: none;
 }
@@ -98,16 +104,6 @@ body {
 /* Icons next to the links */
 .icon {
     color: #000000;
-}
-
-/* Setup the foooter */
-#footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: #FFFFFF;
-    background: rgba(0, 0, 0, 0.5);
 }
 
 /* social media icons and app icons */
@@ -118,13 +114,13 @@ body {
 
 /* socail link header */
 #socialLinks h4 {
-    padding-left: 50px;
+    padding-left: 5px;
 }
 
 /* social links list */
 #socialLinks ul {
     list-style-type: none;
-    
+    margin-left: -40px;
 }
 
 #socialLinks li {
@@ -141,6 +137,16 @@ body {
     background-color: #D81B60;
 }
 
+/* Setup the foooter */
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 /* Float the app div to the right */
 #app {
     float: right;
@@ -149,13 +155,13 @@ body {
 /* fix the app header to align with the social link header */
 #app h4 {
     margin-top: -40px;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 /* Setup the app ul */
 #app ul {
     list-style-type: none;
-    margin-right: 30px
+    margin-right: 10px
 }
 
 /* Float the app li to the right */
@@ -173,6 +179,8 @@ body {
     background-color: #D81B60;
 }
 
+
+
 /* Updated the width of the nav-bar to fit when the screen
    size is 320px or less.
 */
@@ -180,7 +188,26 @@ body {
     #nav-bar {
         width: 560px;
     }
+    
+    #footer {
+        position: relative;
+        top: 100px;
+        width: 100%;
+    }
 }
+
+/* Media queries for screen sizes 320 x 568 pixels */
+@media screen and (max-width: 320px) and (min-height: 568px) {
+    #footer {
+        position: relative;
+        top: 300px;
+        width: 175%;
+        height: 90px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+}
+
 
 /* Updated the width of the nav-bar to fit when the screen
    size is 375px or less.
@@ -188,6 +215,40 @@ body {
 @media screen and (max-width: 375px) {
     #nav-bar {
         width: 560px;
+    }
+}
+
+/* Media queries for screen sizes 411 x 731 pixels */
+@media screen and (max-width: 411px) and (min-height: 731px) {
+    #footer {
+        position: relative;
+        top: 240px;
+        width: 136%;
+        height: 80px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+}
+
+/* Media queries for screen sizes 411 x 823 pixels */
+@media screen and (max-width: 411px) and (min-height: 823px) {
+    #footer {
+        position: relative;
+        top: 240px;
+        width: 136%;
+        height: 80px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+}
+
+/* Media queries for screen sizes 414 x 736 pixels */
+@media screen and (max-width: 414px) and (min-height: 736px) {
+    #footer {
+        position: relative;
+        top: 240px;
+        width: 136%;
+        height: 80px;
     }
 }
 
