@@ -42,7 +42,7 @@ body {
 }
 
 #navbar a:hover {
-   background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 /* Center the selectGroup-box */
@@ -68,6 +68,7 @@ body {
     border-radius: 20px;
     border: 3px solid #000000;
     font-weight: bold;
+    margin-bottom: 400px;
 }
 
 /* Hover over the button changes color */
@@ -90,6 +91,7 @@ body {
     border: 2px solid #CD5C5C;
     margin-top: 10px;
     font-weight: bold;
+    margin-bottom: 400px;
 }
 
 /* Change the color of the button when
@@ -266,4 +268,75 @@ body {
     cursor: pointer;
     background-color: #000000;
     color: #FFFFFF;
+}
+
+/* social media icons and app icons */
+.icons {
+    font-size: 20px;
+    color: #B71C1C;
+}
+
+/* socail link header */
+#socialLinks h4 {
+    padding-left: 5px;
+}
+
+/* social links list */
+#socialLinks ul {
+    list-style-type: none;
+    margin-left: -40px;
+}
+
+#socialLinks li {
+    float: left;
+}
+
+#socialLinks a {
+    display: block;
+    padding: 8px;
+}
+
+#socialLinks a:hover {
+    cursor: pointer;
+    background-color: #607D8B;
+}
+
+/* Setup the foooter */
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #000000;
+}
+
+/* Float the app div to the right */
+#app {
+    float: right;
+}
+
+/* fix the app header to align with the social link header */
+#app h4 {
+    margin-top: -40px;
+    margin-left: 35px;
+}
+
+/* Setup the app ul */
+#app ul {
+    list-style-type: none;
+}
+
+/* Float the app li to the right */
+#app li {
+    float: right;
+}
+
+#app a {
+    display: block;
+    padding: 8px;
+}
+
+#app a:hover {
+    cursor: pointer;
+    background-color: #607D8B;
 }
