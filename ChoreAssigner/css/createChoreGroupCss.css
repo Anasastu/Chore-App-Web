@@ -340,3 +340,56 @@ body {
     cursor: pointer;
     background-color: #607D8B;
 }
+
+@media screen and (max-width: 320px) and (min-height: 568px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+    
+    #navbar ul {
+        width: 125%;
+    }
+}
+
+@media screen and (max-width: 360px) and (min-height: 640px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+}
+
+
+@media screen and (max-width: 375px) and (min-height: 667px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+    
+    #navbar ul {
+        width: 109%;
+    }
+}
+
+
+@media screen and (max-width: 411px) and (min-height: 731px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+}
+
+@media screen and (max-width: 375px) and (min-height: 812px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+}
+
+
+@media screen and (max-width: 414px) and (min-height: 736px) {
+    #footer {
+        position: relative;
+        top: 5px;
+    }
+}
