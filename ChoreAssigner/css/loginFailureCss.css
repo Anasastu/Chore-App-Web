@@ -3,7 +3,7 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-color: #336699;
+    background-color: #607D8B;
 }
 
 h2 {
@@ -36,7 +36,7 @@ h2 {
 }
 
 #nav-bar a:hover {
-    color: #98FB98;
+    color: #B22222;
 }
 
 .icon {
@@ -60,7 +60,7 @@ h2 {
     padding: 0 0 20px;
     text-align: center;
     font-size: 22px;
-    color: #FFFFFF;
+    color: #FF0000;
 }
 
 /* Set up the input text, password, and sumbit fields */
@@ -93,7 +93,7 @@ h2 {
 
 .login-box input[type="submit"]:hover {
     cursor: pointer;
-    background-color: #FAFAD2;
+    background-color: #B22222;
     color: #000;
 }
 
@@ -128,7 +128,7 @@ h2 {
 
 .register-box input[type="submit"]:hover {
     cursor: pointer;
-    background-color: #FAFAD2;
+    background-color: #B22222;
 }
 
 /* Resize the img in the nav-bar */
