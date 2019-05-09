@@ -10,7 +10,7 @@ body {
 }
 
 .highlightRed {
-    background-color: red;
+    background-color: #FF0000;
 }
 
 .hide {
@@ -303,11 +303,12 @@ body {
 
 /* Setup the foooter */
 #footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
     color: #000000;
+    
 }
 
 /* Float the app div to the right */
@@ -372,11 +373,16 @@ body {
 }
 
 
-@media screen and (max-width: 411px) and (min-height: 731px) {
-    #footer {
-        position: relative;
-        top: 5px;
+@media screen and (max-width: 411px) and (min-height: 823px) {
+    
+    #socialLinks h4 {
+        display: none;
     }
+    
+    #app h4 {
+        display: none;
+    }
+    
 }
 
 @media screen and (max-width: 375px) and (min-height: 812px) {
@@ -390,6 +396,26 @@ body {
 @media screen and (max-width: 414px) and (min-height: 736px) {
     #footer {
         position: relative;
-        top: 5px;
+        top: 40px;
+    }
+    
+    #socialLinks h4 {
+        position: relative;
+        top: -30px;
+    }
+    
+    #socialLinks ul {
+        position: relative;
+        top: -50px;
+    }
+    
+    #app h4 {
+        position: relative;
+        top: -30px;
+    }
+    
+    #app ul {
+        position: relative;
+        top: -50px;
     }
 }
