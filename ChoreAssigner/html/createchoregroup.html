@@ -45,7 +45,7 @@
 		-->
 		<form id="selectGroupName" class="">
 			<label for="groupName">Name Your ChoreGroup: <br>
-				<input id="groupName" type="text" class="" placeholder="ChoreGroup Name" >
+				<input id="groupName" type="text" class="" placeholder="ChoreGroup Name" pattern="[A-Za-z0-9\s]{2,18}">
 			</label>
 			<br>
 			<input class="btn" type="submit" value="Continue">
@@ -147,7 +147,7 @@
 		</form>
 		<form id="customChoreSelectionForm">
 			<label for="customChore">
-				<input id="customChore" type="text" class="" placeholder="Custom Chore" >
+				<input id="customChore" type="text" class="" placeholder="Custom Chore" pattern='[A-Za-z0-9\s]{2,18}'>
 			</label>
 			<input type="submit" value="Add">
 		</form>
@@ -200,9 +200,16 @@
 			</div>
 		-->
 		<div id="assignedChoresList" class='assignedChoreListContainer'>
-			<div> 
-				<button id="assignedChoresListBack">Back</button>
-			</div>
+			<form id="assignedChoresListForm" action="" method="post" >
+
+			</form>
+		</div>
+		<div> 
+			<form id="emailForAssignedChoresListForm">
+				<input id="emailInputForAssignedChoresListForm" type="text" class="" placeholder="Enter Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+				<input type="submit" value="Send Chores!">
+			</form>
+			<button id="assignedChoresListBack">Back</button>
 		</div>
 	</div>
 
