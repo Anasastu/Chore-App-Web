@@ -270,6 +270,38 @@ body {
     color: #FFFFFF;
 }
 
+/* Setup the emailInput textfield */
+#emailInputForAssignedChoresListForm {
+    background-color: #000000;
+    color: #FFFF00;
+}
+
+/* Setup the emailForm submit button */
+#emailForAssignedChoresListForm input[type="submit"] {
+    border-radius: 20px;
+    border: 2px solid #0000FF;
+    cursor: pointer;
+    background-color: #D3D3D3;
+}
+
+#emailForAssignedChoresListForm input[type="submit"]:hover {
+    background-color: #000000;
+    color: #90EE90;
+}
+
+/* Setup the back button */
+#assignedChoresListBack {
+    border: 2px solid #B22222;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #D3D3D3;
+}
+
+#assignedChoresListBack:hover {
+    background-color: #000000;
+    color: #FF0000;
+}
+
 /* social media icons and app icons */
 .icons {
     font-size: 20px;
