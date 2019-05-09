@@ -282,6 +282,7 @@ body {
     border: 2px solid #0000FF;
     cursor: pointer;
     background-color: #D3D3D3;
+    font-weight: bold;
 }
 
 #emailForAssignedChoresListForm input[type="submit"]:hover {
@@ -295,6 +296,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     background-color: #D3D3D3;
+    font-weight: bold;
 }
 
 #assignedChoresListBack:hover {
