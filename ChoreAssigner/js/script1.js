@@ -68,7 +68,7 @@ function startCreateChoreGroup() {
 
   function groupName(evt) {
     nameOfGroup = document.getElementById("groupName").value;
-    if(nameOfGroup != "") {
+    if(nameOfGroup !== "") {
       //hide groupName div 
       document.getElementById("selectGroupName").classList.add("hide");
       //unhide the numOfActorsSelection div
@@ -130,7 +130,7 @@ function startCreateChoreGroup() {
   function addActors(evt) {
     numberOfActors = document.getElementById("numOfActors").value;
     //evt.preventDefault();
-    if(numberOfActors != 'null') {
+    if(numberOfActors !== 'null') {
       ///////CSS
       // Reveal Name Section
       document.getElementById("nameSection").classList.remove("hide");
@@ -156,7 +156,7 @@ function startCreateChoreGroup() {
         - Leave Ids alone, do not delete any classes, you can add class just use SINGLE quotes
         */
         //create name input for each actor 
-        var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' pattern='[A-Za-z\s]{2,18}' required><br></div>";
+        var nameInfo = "<div class='namingOfActors'>" + i + ". <input id='actorNaming" + i + "' type='text' class='' placeholder='Enter Name' pattern='[A-Za-z0-9\s]{2,18}' required><br></div>";
         //create a new div element
         var div = document.createElement('div');
         //put the nameInfo html into the div we just created
@@ -372,7 +372,7 @@ function startCreateChoreGroup() {
       let choreAssignee = document.getElementById("choreAssign" + x);
       let choreExemptee = document.getElementById("choreExempt" + x);
       let dueDate = document.getElementById("choreDate" + x);
-      if(dueDate.value == ""){
+      if(dueDate.value === ""){
           allGood = false;
           if(!dueDate.classList.contains("highlightRed")){
             dueDate.classList.toggle("highlightRed");
@@ -382,7 +382,7 @@ function startCreateChoreGroup() {
           dueDate.classList.toggle("highlightRed");
         }
       }
-      if(choreExemptee.value != "null"){
+      if(choreExemptee.value !== "null"){
         if(choreAssignee.value === choreExemptee.value){
           allGood = false;
           if(!choreAssignee.classList.contains("highlightRed")){
@@ -444,7 +444,7 @@ function startCreateChoreGroup() {
       chore.assigned = document.getElementById("choreAssign" + i).value;
       chore.exempt = document.getElementById("choreExempt" + i).value;
       // actors manully assigned
-      if(chore.assigned != "random"){
+      if(chore.assigned !== "random"){
         // get index of assigned actor 
         let index = chore.assigned.substr(5);
         chore.assigned = actorsArray[index];
@@ -453,7 +453,7 @@ function startCreateChoreGroup() {
         actorsArray[index].chores += 1;
       }else{
         // chore assigned randomly and has exemption 
-        if(chore.exempt != "null"){
+        if(chore.exempt !== "null"){
           // get index of exemption and send to randomlyAssignChore
           let exemptIndex = chore.exempt.substr(5);
           let index = randomlyAssignChore(exemptIndex);
@@ -475,10 +475,10 @@ function startCreateChoreGroup() {
 
   function randomlyAssignChore(exemption) {
     var randomNum;
-    if(exemption != 666){ 
+    if(exemption !== 666){
       do{
         randomNum = Math.floor(Math.random() * (numberOfActors));
-      }while(randomNum == exemption);
+      }while(randomNum === exemption);
       return randomNum;
     }else{
       randomNum = Math.floor(Math.random() * (numberOfActors));
@@ -510,9 +510,9 @@ function startCreateChoreGroup() {
       }
       if(max >= 2){
         for(let y = 0; y < choreArray.length; y++){
-          if((actorsArray[maxIndex].name == choreArray[y].assigned.name) && 
-             (choreArray[y].manuallyAssigned == false) && 
-             (choreArray[y].exempt != actorsArray[minIndex].name)) 
+          if((actorsArray[maxIndex].name === choreArray[y].assigned.name) &&
+             (choreArray[y].manuallyAssigned === false) &&
+             (choreArray[y].exempt !== actorsArray[minIndex].name))
           {
             choreArray[y].assigned = actorsArray[minIndex];
             choreArray[y].assigned.chores += 1;
@@ -542,7 +542,7 @@ function startCreateChoreGroup() {
     // reveal assign chores section
     document.getElementById("assignedChoresSection").classList.remove("hide");
     //////////DOCUMENT FRAGMENT NEEDS CONTAINER
-    var assignedChoreListContainer = document.getElementById("assignedChoresList");
+    var assignedChoreListContainer = document.getElementById("assignedChoresListForm");
     /*
       EDITTING CSS - please carefully go in and add classes with SINGLE quotes 
                    - do not remove 'actorContainer' class
@@ -557,11 +557,7 @@ function startCreateChoreGroup() {
             //Due Date
     var html9 = "</div>" ;
             //email
-    var htmlPart3= "</div><div class='emailForm'><form id='emailSendForm";
-            //form number
-    var htmlPart5 = "' action='' method='get'><input id='emailSendFormInput";
-            // form number
-    var htmlPart7 = "' type='text' name='email' placeholder='Enter Email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'><input type='submit' value='Send'><div class='ratingItem'></form></div><br></div></div>";
+    var htmlPart3= "</div><br></div></div>";
     var x = 0;
     for(x = 0; x < actorsArray.length; x++){
       var actor = actorsArray[x];
@@ -570,11 +566,11 @@ function startCreateChoreGroup() {
       var htmlPart2 = "";
       var i = 0;
       for(i = 0; i < choreArray.length; i++){
-        if(choreArray[i].assigned.name == actorName){
+        if(choreArray[i].assigned.name === actorName){
           htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9;
         }
       }
-      let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3 + x + htmlPart5 + x + htmlPart7;
+      let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
       // take the document fragment we made and glue it onto the DOM \m/
       assignedChoreListContainer.appendChild(createFragment(fullActorContainer));
     }
@@ -582,12 +578,12 @@ function startCreateChoreGroup() {
 
   function assignChoresEvents(){
     document.getElementById("assignedChoresListBack").addEventListener('click',backToChoreOptions,false);
-    
+    document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailContent,false);
     // some other code that will go to processChoreAssignments
   }
 
   function backToChoreOptions(evt) {
-    var deleteAssignedChoreList = document.getElementById("assignedChoresList").querySelectorAll(".actorContainer");
+    var deleteAssignedChoreList = document.getElementById("assignedChoresListForm").querySelectorAll(".actorContainer");
     for(let i = 0; i < deleteAssignedChoreList.length; i++){
       deleteAssignedChoreList[i].remove();
     }
@@ -600,7 +596,58 @@ function startCreateChoreGroup() {
 
 }//<**************----- END Create Chore Group  ------****************
 
+////////////////////////////////////////////////
+/*      Email Chore Assignment Form
+        fill in mailto action with given email
+*/
+////////////////////////////////////////////////
+function emailChoreAssignmentForm(){
+ 
+  //var sendToEmail = document.getElementById("emailInputForAssignedChoresListForm").value;
+  //document.getElementById("assignedChoresListForm").action = "mailto:" + sendToEmail;
+  document.getElementById("assignedChoresListForm").submit();
+  
+}
 
+////////////////////////////////////////////////
+/*      Process Email content
+        replace spaces and chars so we can prepopulate email
+*/
+////////////////////////////////////////////////
+function processEmailContent(evt){
+  evt.preventDefault();
+  var email = document.getElementById("emailInputForAssignedChoresListForm").value;
+  var contentNodes = document.getElementById("assignedChoresListForm").querySelectorAll(".actorContainer");
+  var content = "";
+  var mailTo = "";
+  for(let i = 0; i < contentNodes.length; i++){
+    content += contentNodes[i].innerText;
+  }
+  //console.log(content);
+
+  email = email.replace(/[\/\@\+]+/g,function(str){
+    str = str.replace(/\//g,"%2F");
+    str = str.replace(/\@/g,"%40");
+    str = str.replace(/\+/g,"%2B");
+    return str;
+  });
+  //console.log(email);
+
+  content = content.replace(/[\n\r\s\/]+/g, function(str){
+    str = str.replace(/\n/g,"%0A");
+    str = str.replace(/\s/g,"%20");
+    str = str.replace(/\r/g,"%0A");
+    str = str.replace(/\//g,"%2F");
+    return str;
+  });
+  //console.log(content);
+
+  mailTo = 'mailto:' + email + '?subject=Chore%20Assignments&body=' + content + '%0A';
+  //console.log(mailTo);
+  document.getElementById("assignedChoresListForm").action = mailTo;
+
+  emailChoreAssignmentForm();
+}
 
 ////////////////////////////////////////////////
 /*      Process Chore Assignments
@@ -640,7 +687,7 @@ function createFragment(validHtml) {
 //////////////////////////////////////////////
 function addLoadEvent(func) {
   var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
+  if (typeof window.onload !== 'function') {
     window.onload = func;
   } else {
     window.onload = function() {
