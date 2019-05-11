@@ -1,0 +1,66 @@
+body {
+    background-color: #D3D3D3;
+    background:url('underConstruction.png');
+    background-repeat: no-repeat;
+    background-size: auto 1000px;
+}
+
+/*
+    Media Queries
+    Adjusted the background-size for the following
+    screen sizes.
+*/
+@media screen and (max-width: 320px) {
+    body {
+        background-size: 350px 600px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    body {
+        background-size: 400px 590px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    body {
+        background-size: 425px 600px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 360px) and (min-height: 640px) {
+    body {
+        background-size: 360px 640px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 411px) and (min-height: 731px) {
+    body {
+        background-size: 411px 700px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 375px) and (min-height: 667px) {
+    body {
+        background-size: 400px 670px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 414px) and (min-height: 736px) {
+    body {
+        background-size: 415px 682px;
+        background-color: #D3D3D3;
+    }
+}
+
+@media screen and (max-width: 320px) and (min-height: 568px) {
+    body {
+        background-size: 330px 570px;
+    }
+}
