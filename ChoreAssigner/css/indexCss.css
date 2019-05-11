@@ -1,4 +1,4 @@
-/* -version 2.2 - Dionte 4/19/2019 */
+/* -version 2.2 - Dionte 5/10/2019 */
 
 body {
     margin: 0px auto;
@@ -190,22 +190,8 @@ body {
     }
     
     #footer {
-        position: relative;
-        top: 100px;
-        width: 100%;
+        display: none;
     }
-}
-
-/* Media queries for screen sizes 320 x 568 pixels */
-@media screen and (max-width: 320px) and (min-height: 568px) {
-    #footer {
-        position: relative;
-        top: 300px;
-        width: 175%;
-        height: 90px;
-        background: rgba(0, 0, 0, 0.5);
-    }
-    
 }
 
 
@@ -216,16 +202,16 @@ body {
     #nav-bar {
         width: 560px;
     }
+    
+    #footer {
+        display: none;
+    }
 }
 
 /* Media queries for screen sizes 411 x 731 pixels */
 @media screen and (max-width: 411px) and (min-height: 731px) {
     #footer {
-        position: relative;
-        top: 240px;
-        width: 136%;
-        height: 80px;
-        background: rgba(0, 0, 0, 0.5);
+        display: none;
     }
     
 }
@@ -233,11 +219,7 @@ body {
 /* Media queries for screen sizes 411 x 823 pixels */
 @media screen and (max-width: 411px) and (min-height: 823px) {
     #footer {
-        position: relative;
-        top: 240px;
-        width: 136%;
-        height: 80px;
-        background: rgba(0, 0, 0, 0.5);
+        display: none;
     }
     
 }
@@ -245,10 +227,7 @@ body {
 /* Media queries for screen sizes 414 x 736 pixels */
 @media screen and (max-width: 414px) and (min-height: 736px) {
     #footer {
-        position: relative;
-        top: 240px;
-        width: 136%;
-        height: 80px;
+        display: none;
     }
 }
 
@@ -258,6 +237,10 @@ body {
 @media screen and (max-width: 425px) {
     #nav-bar {
         width: 560px;
+    }
+    
+    #footer {
+        display: none;
     }
     
 }
