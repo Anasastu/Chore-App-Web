@@ -1,4 +1,4 @@
-/* -version 2.2 - Dionte 5/10/2019 */
+/* -version 2.2 - Dionte 4/19/2019 */
 
 body {
     margin: 0px;
@@ -226,18 +226,33 @@ body {
 #customChoreSelectionForm input[type="submit"]:hover {
    background-color: #000000; 
     color: #FF5722;
+    cursor: pointer;
 }
 
+/* Continue button */
 #preChoreListSection input[type="submit"] {
     border-radius: 20px;
-    border: 2px solid #5E35B1;
+    border: 2px solid #303F9F;
     background-color: #D3D3D3;
 }
 
+#preChoreListSection input[type="submit"]:hover {
+    background-color: #000000;
+    color: #B3E5FC;
+    cursor: pointer;
+}
+
+/* Back button */
 #preChoreListSection input[type="reset"] {
     border-radius: 20px;
-    border: 2px solid #4DB6AC;
+    border: 2px solid #B2DFDB;
     background-color: #D3D3D3;
+}
+
+#preChoreListSection input[type="reset"]:hover {
+    background-color: #000000;
+    color: #B2DFDB;
+    cursor: pointer;
 }
 
 .groupNameGoesHere {
