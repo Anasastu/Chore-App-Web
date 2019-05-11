@@ -1,4 +1,4 @@
-/* -version 2.2 - Dionte 4/19/2019 */
+/* -version 2.2 - Dionte 5/10/2019 */
 
 body {
     margin: 0px;
@@ -216,6 +216,30 @@ body {
     width: 150px;
 }
 
+/* Add button */
+#customChoreSelectionForm input[type="submit"] {
+    border-radius: 20px;
+    border: 2px solid #FF5722;
+    background-color: #D3D3D3;
+}
+
+#customChoreSelectionForm input[type="submit"]:hover {
+   background-color: #000000; 
+    color: #FF5722;
+}
+
+#preChoreListSection input[type="submit"] {
+    border-radius: 20px;
+    border: 2px solid #5E35B1;
+    background-color: #D3D3D3;
+}
+
+#preChoreListSection input[type="reset"] {
+    border-radius: 20px;
+    border: 2px solid #4DB6AC;
+    background-color: #D3D3D3;
+}
+
 .groupNameGoesHere {
     text-decoration: underline;
     color: #000000;
@@ -378,8 +402,7 @@ body {
 
 @media screen and (max-width: 320px) and (min-height: 568px) {
     #footer {
-        position: relative;
-        top: 5px;
+        display: none;
     }
     
     #navbar ul {
@@ -389,16 +412,14 @@ body {
 
 @media screen and (max-width: 360px) and (min-height: 640px) {
     #footer {
-        position: relative;
-        top: 5px;
+        display: none;
     }
 }
 
 
 @media screen and (max-width: 375px) and (min-height: 667px) {
     #footer {
-        position: relative;
-        top: 5px;
+        display: none;
     }
     
     #navbar ul {
@@ -410,35 +431,13 @@ body {
 
 @media screen and (max-width: 375px) and (min-height: 812px) {
     #footer {
-        position: relative;
-        top: 5px;
+        display: none;
     }
 }
 
 
 @media screen and (max-width: 414px) and (min-height: 736px) {
     #footer {
-        position: relative;
-        top: 40px;
-    }
-    
-    #socialLinks h4 {
-        position: relative;
-        top: -30px;
-    }
-    
-    #socialLinks ul {
-        position: relative;
-        top: -50px;
-    }
-    
-    #app h4 {
-        position: relative;
-        top: -30px;
-    }
-    
-    #app ul {
-        position: relative;
-        top: -50px;
+        display: none;
     }
 }
