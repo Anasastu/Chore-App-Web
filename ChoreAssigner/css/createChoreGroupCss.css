@@ -1,4 +1,4 @@
-/* -version 2.2 - Dionte 4/19/2019 */
+/* -version 2.2 - Dionte 5/12/2019 */
 
 body {
     margin: 0px;
@@ -431,6 +431,23 @@ body {
     }
 }
 
+@media screen and (max-width: 375px) {
+    #socialLinks ul {
+        display: none;
+    }
+    
+    #app ul {
+        display: none;
+    }
+    
+    #socialLinks h4 {
+        display: none;
+    }
+    
+    #app h4 {
+        display: none;
+    }
+}
 
 @media screen and (max-width: 375px) and (min-height: 667px) {
     #footer {
@@ -456,3 +473,22 @@ body {
         display: none;
     }
 }
+
+@media screen and (max-width: 411px) and (min-height: 731px) {
+    #socialLinks ul {
+        display: none;
+    }
+    
+    #app ul {
+        display: none;
+    }
+    
+    #socialLinks h4 {
+        display: none;
+    }
+    
+    #app h4 {
+        display: none;
+    }
+}
+
