@@ -184,6 +184,7 @@ function startCreateChoreGroup() {
     for(x = 1; x <= numberOfActors; x++) {
       let person = new Actor();
       person.name = document.getElementById("actorNaming" + x).value;
+      person.chores = 0;
       actorsArray[x - 1] = person;
     }
     if(evt){
@@ -450,9 +451,8 @@ function startCreateChoreGroup() {
         let index = chore.assigned.substr(5);
         chore.assigned = actorsArray[index].name;
         chore.manuallyAssigned = true;
-        chore.assigned.chores += 1;
         actorsArray[index].chores += 1;
-        console.log(actorsArray[index].name + " " + actorsArray[index].chores);
+        //console.log("assignment -- " + actorsArray[index].name + " " + actorsArray[index].chores);
       }else{
         // chore assigned randomly and has exemption 
         if(chore.exempt !== "null"){
@@ -461,16 +461,14 @@ function startCreateChoreGroup() {
           let index2 = randomlyAssignChore(exemptIndex);
           chore.assigned = actorsArray[index2].name;
           chore.exempt = actorsArray[exemptIndex].name;
-          chore.assigned.chores += 1;
           actorsArray[index2].chores += 1;
-          console.log(actorsArray[index2].name + " " + actorsArray[index2].chores);
+          //console.log("assignment -- " + actorsArray[index2].name + " " + actorsArray[index2].chores);
         }else{
           // chore assigned randomly w/ no exemptions
           let index3 = randomlyAssignChore(666); //666 lets randAssignChore know there are no exemptions
           chore.assigned = actorsArray[index3].name;
-          chore.assigned.chores += 1; 
           actorsArray[index3].chores += 1;  
-          console.log(actorsArray[index3].name + " " + actorsArray[index3].chores);                
+          //console.log("assignment -- " + actorsArray[index3].name + " " + actorsArray[index3].chores);                
         }
       }
       choreArray[i] = chore;
@@ -490,112 +488,92 @@ function startCreateChoreGroup() {
     }
   }
 
-  function distributionCheck1(){
-    var p = 0;
-    var max = actorsArray[0].chores;
-    //console.log(max);
-    var min = actorsArray[0].chores;
+
+  function distributionCheck(){
+    var max = 0;
     var maxIndex = 0;
+    var min = choreArray.length;
     var minIndex = 0;
-    for(p = 0; p < actorsArray.length; p++){
-      if(max <= actorsArray[p].chores){
-        max = actorsArray[p].chores;
-        maxIndex = p;
-      } 
-      if(min >= actorsArray[p].chores){
-        min = actorsArray[p].chores;
-        minIndex = p;
+    var idealNumChore = choreArray.length / numberOfActors;
+    var i = 0;
+    var noChores = true;
+    while(i < actorsArray.length || noChores){
+      if(noChores && i >= actorsArray.length){
+        i=0;
       }
-      for(var x = 0; x < actorsArray.length; x++){
-        if(actorsArray[x].chores >= max){
-          max = actorsArray[x].chores;
-          maxIndex = x;
-          //console.log("max = " + max);
-          //console.log("maxIndex = " + maxIndex);
+      //console.log(actorsArray[i].name)
+      for(var x = actorsArray.length - 1; x >= 0; x--){
+        if(actorsArray[i].chores > actorsArray[x].chores){
+          if(max <= actorsArray[i].chores){
+            max = actorsArray[i].chores;
+            maxIndex = i;
+            //console.log("1new max = " + actorsArray[i].chores + " " + actorsArray[i].name);
+          }
+          if(actorsArray[x].chores < min){
+            min = actorsArray[x].chores;
+            minIndex = x;
+            if(min == 0){
+              noChores = true;
+            }
+            else{
+              noChores = false;
+            }
+            //console.log("1new min = " + actorsArray[x].chores + " " + actorsArray[x].name);
+          }
+        }else{
+          if(actorsArray[x].chores > max){
+            max = actorsArray[x].chores;
+            maxIndex = x;
+            //console.log("2new max = " + actorsArray[x].chores + " " + actorsArray[x].name);
+          }
+          if(actorsArray[i].chores < min){
+            min = actorsArray[i].chores;
+            minIndex = i;
+            if(min == 0){
+              noChores = true;
+            }
+            else{
+              noChores = false;
+            }
+            //console.log("2new min = " + actorsArray[i].chores + " " + actorsArray[i].name);
+          }
         }
-        if(actorsArray[x].chores <= min){
-          min = actorsArray[x].chores;
-          minIndex = x;
-          //console.log("min = " + min);
-          //console.log("minIndex = " + minIndex);
-        }
-        //console.log("inner loop " + x + " of " + actorsArray.length);
-      }
-      if(max >= 2){
-        for(let y = 0; y < choreArray.length; y++){
-          if((actorsArray[maxIndex].name === choreArray[y].assigned.name) &&
-             (choreArray[y].manuallyAssigned === false) &&
-             (choreArray[y].exempt !== actorsArray[minIndex].name))
-          {
-            choreArray[y].assigned = actorsArray[minIndex];
-            choreArray[y].assigned.chores += 1;
-            actorsArray[minIndex].chores += 1;
-            actorsArray[maxIndex].chores -= 1;
-            //console.log("Switching " + maxIndex + "with " + minIndex);
-            break;
+        if(min < max){
+          for(let y = 0; y < choreArray.length; y++){
+            if((actorsArray[maxIndex].name === choreArray[y].assigned) &&
+               (choreArray[y].manuallyAssigned === false) &&
+               (choreArray[y].exempt !== actorsArray[minIndex].name))
+            {
+              choreArray[y].assigned = actorsArray[minIndex].name;
+              actorsArray[minIndex].chores += 1;
+              actorsArray[maxIndex].chores -= 1;
+              min += 1;
+              max -= 1;
+              if(min == 0){
+                noChores = true;
+              }
+              else{
+                noChores = false;
+              }
+              //console.log("Switching " + maxIndex + "with " + minIndex);
+              break;
+            }
           }
         }
       }
-      //console.log("outer loop " + p + " of " + actorsArray.length);
-    }
-  }// end distributionCheck
-/*
-  function distributionCheck(){
-    var 
-*/
-
-  function distributionCheck(){
-    var p = 0;
-    for(p = 0; p < actorsArray.length; p++){
-      var max = actorsArray[p].chores;
-      var maxIndex = p;
-      var min = actorsArray[p].chores;
-      var minIndex = p;
-      for(var x = 0; x < actorsArray.length; x++){
-        if(actorsArray[x].chores >= max){
-          max = actorsArray[x].chores;
-          maxIndex = x;
-          //console.log("max = " + max);
-          //console.log("maxIndex = " + maxIndex);
-        }
-        if(actorsArray[x].chores <= min){
-          min = actorsArray[x].chores;
-          minIndex = x;
-          //console.log("min = " + min);
-          //console.log("minIndex = " + minIndex);
-        }
-        //console.log("inner loop " + x + " of " + actorsArray.length);
-      }
-      if(max >= 2){
-        for(let y = 0; y < choreArray.length; y++){
-          if((actorsArray[maxIndex].name === choreArray[y].assigned.name) &&
-             (choreArray[y].manuallyAssigned === false) &&
-             (choreArray[y].exempt !== actorsArray[minIndex].name))
-          {
-            choreArray[y].assigned = actorsArray[minIndex];
-            choreArray[y].assigned.chores += 1;
-            actorsArray[minIndex].chores += 1;
-            actorsArray[maxIndex].chores -= 1;
-            //console.log("Switching " + maxIndex + "with " + minIndex);
-            break;
+      if(noChores){
+        for(let a = 0; a< choreArray.length; a++){
+          if(actorsArray[minIndex].name == choreArray[a].exempt){
+            noChores = false;
+          }
+          if(actorsArray[maxIndex].name == choreArray[a].assigned && choreArray[a].manuallyAssigned == true){
+            noChores = false;
           }
         }
       }
-      //console.log("outer loop " + p + " of " + actorsArray.length);
+      i++;
     }
   }// end distributionCheck
-
-
-
-
-
-
-  
-
-
-
-
-
 
   //<------------------- END Assign Chores ---------------------
 
@@ -639,7 +617,6 @@ function startCreateChoreGroup() {
       for(i = 0; i < choreArray.length; i++){
         if(choreArray[i].assigned == actorName){
           htmlPart2 += html5 + choreArray[i].name + html7 + choreArray[i].date + html9;
-          console.log("Inside thsi shit dawg");
         }
       }
       let fullActorContainer = htmlPart1 + htmlPart2 + htmlPart3;
@@ -650,6 +627,7 @@ function startCreateChoreGroup() {
 
   function assignChoresEvents(){
     document.getElementById("assignedChoresListBack").addEventListener('click',backToChoreOptions,false);
+    //document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailContent,false);
     document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailContent,false);
     // some other code that will go to processChoreAssignments
   }
@@ -664,6 +642,64 @@ function startCreateChoreGroup() {
     document.getElementById("choreOptionsSection").classList.remove("hide");
     choresIntoArray();
     choreOptionEvents();
+  }
+
+    ////////////////////////////////////////////////
+  /*      Process Chore Assignments
+          some process for sending forms to email or to backend
+  */
+  ////////////////////////////////////////////////
+  function processChoreAssignmentsPython(){
+    //evt.preventDefault();
+    var choresToSend = { list: ""};
+    for(var i = 0; i < choreArray.length; i++){
+      choresToSend.list += "Chore" + i+1;
+      choresToSend.list += choreArray[i].assigned ;
+      choresToSend.list += choreArray[i].name;
+      choresToSend.list += choreArray[i].date + " ";
+    }
+    var sendJson = JSON.stringify(choresToSend);
+    console.log(sendJson);
+  }
+
+    ////////////////////////////////////////////////
+  /*      Process Email content
+          replace spaces and chars so we can prepopulate email
+  */
+  ////////////////////////////////////////////////
+  function processEmailContent(evt){
+    evt.preventDefault();
+    var email = document.getElementById("emailInputForAssignedChoresListForm").value;
+    var contentNodes = document.getElementById("assignedChoresListForm").querySelectorAll(".actorContainer");
+    var content = "";
+    var mailTo = "";
+    for(let i = 0; i < contentNodes.length; i++){
+      content += contentNodes[i].innerText;
+    }
+    //console.log(content);
+
+    email = email.replace(/[\/\@\+]+/g,function(str){
+      str = str.replace(/\//g,"%2F");
+      str = str.replace(/\@/g,"%40");
+      str = str.replace(/\+/g,"%2B");
+      return str;
+    });
+    //console.log(email);
+
+    content = content.replace(/[\n\r\s\/]+/g, function(str){
+      str = str.replace(/\n/g,"%0A");
+      str = str.replace(/\s/g,"%20");
+      str = str.replace(/\r/g,"%0A");
+      str = str.replace(/\//g,"%2F");
+      return str;
+    });
+    //console.log(content);
+
+    mailTo = 'mailto:' + email + '?subject=Chore%20Assignments&body=' + content + '%0A';
+    //console.log(mailTo);
+    document.getElementById("assignedChoresListForm").action = mailTo;
+    processChoreAssignmentsPython();
+    emailChoreAssignmentForm();
   }
 
 }//<**************----- END Create Chore Group  ------****************
@@ -681,54 +717,9 @@ function emailChoreAssignmentForm(){
   
 }
 
-////////////////////////////////////////////////
-/*      Process Email content
-        replace spaces and chars so we can prepopulate email
-*/
-////////////////////////////////////////////////
-function processEmailContent(evt){
-  evt.preventDefault();
-  var email = document.getElementById("emailInputForAssignedChoresListForm").value;
-  var contentNodes = document.getElementById("assignedChoresListForm").querySelectorAll(".actorContainer");
-  var content = "";
-  var mailTo = "";
-  for(let i = 0; i < contentNodes.length; i++){
-    content += contentNodes[i].innerText;
-  }
-  //console.log(content);
 
-  email = email.replace(/[\/\@\+]+/g,function(str){
-    str = str.replace(/\//g,"%2F");
-    str = str.replace(/\@/g,"%40");
-    str = str.replace(/\+/g,"%2B");
-    return str;
-  });
-  //console.log(email);
 
-  content = content.replace(/[\n\r\s\/]+/g, function(str){
-    str = str.replace(/\n/g,"%0A");
-    str = str.replace(/\s/g,"%20");
-    str = str.replace(/\r/g,"%0A");
-    str = str.replace(/\//g,"%2F");
-    return str;
-  });
-  //console.log(content);
 
-  mailTo = 'mailto:' + email + '?subject=Chore%20Assignments&body=' + content + '%0A';
-  //console.log(mailTo);
-  document.getElementById("assignedChoresListForm").action = mailTo;
-
-  emailChoreAssignmentForm();
-}
-
-////////////////////////////////////////////////
-/*      Process Chore Assignments
-        some process for sending forms to email or to backend
-*/
-////////////////////////////////////////////////
-function processChoreAssignmentsPython(){
-  var p;
-}
 
 //<-------------------- END Process Chore Assignments--------------
 
