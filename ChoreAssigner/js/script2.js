@@ -68,7 +68,7 @@ function startCreateChoreGroup() {
 
   function groupName(evt) {
     nameOfGroup = document.getElementById("groupName").value;
-    if(nameOfGroup !== "") {
+    if(nameOfGroup != "") {
       //hide groupName div 
       document.getElementById("selectGroupName").classList.add("hide");
       //unhide the numOfActorsSelection div
@@ -215,9 +215,9 @@ function startCreateChoreGroup() {
     // adds custom chore
     document.getElementById("customChoreSelectionForm").addEventListener("submit",addCustomChore,false);
     // add chore from list
-    document.getElementById("choreSelectionList").addEventListener("click",addSelectedChore,false);
+    document.getElementById("choreSelectionList").addEventListener("dblclick",addSelectedChore,false);
     //remove chore from list
-    document.getElementById("userSelectedChores").addEventListener("click",removeChore,false);
+    document.getElementById("userSelectedChores").addEventListener("click",removeUserSelectedChore,false);
     // user hits continue button
     document.getElementById("preChoreListForm").addEventListener("submit",choresIntoArray,false);
     // user wants to go back to naming
@@ -236,27 +236,47 @@ function startCreateChoreGroup() {
   }//end add custom chore
 
   function addSelectedChore(evt) {
+    evt.preventDefault();
     let choreList = document.getElementById("choreSelectionList");
     let choreToAdd = choreList.selectedIndex;
     let chore = choreList.options[choreToAdd].text;
-    addChoreToList(chore);
-    evt.preventDefault();
+    addChoreToUserList(chore);
+    removeChoreOption();
   }
 
-  function addChoreToList(chore) {
-    let addToList = "<option value='" + chore + "' class=''>" + chore + "</option>";
-    var preChoreListContainer = document.getElementById("userSelectedChores");
-    preChoreListContainer.appendChild(createFragment(addToList));
-    preChoreListContainer.size += 1;
+  function addChoreToUserList(chore) {
+    let addToList = "<option value='" + chore + "' class='choreItem'>" + chore + "</option>";
+    let preChoreListContainer = document.getElementById("userSelectedChores");
+    let childNode = preChoreListContainer.firstChild;
+    preChoreListContainer.insertBefore(createFragment(addToList), childNode);
+    if(preChoreListContainer.size < 7){
+      preChoreListContainer.size += 1;
+    }
+    if(preChoreListContainer.size == 1){
+      preChoreListContainer.classList.remove("hide");
+    }
   }
 
-  function removeChore(evt) {
-    let choreList = document.getElementById("userSelectedChores");
+  function addChoreToSelectionList(chore) {
+    let addToList = "<option value='choreName'>" + chore + "</option>";
+    let choreList = document.getElementById("choreSelectionList");
+    choreList.appendChild(createFragment(addToList));
+  }
+
+  function removeChoreOption(){
+    let choreList = document.getElementById("choreSelectionList");
     let choreToRemove = choreList.selectedIndex; 
     choreList.options[choreToRemove].remove();
+  }
+
+  function removeUserSelectedChore(evt) {
     evt.preventDefault();
-    var preChoreListContainer = document.getElementById("userSelectedChores");
-    preChoreListContainer.size -= 1;
+    let choreList = document.getElementById("userSelectedChores");
+    let choreToRemove = choreList.selectedIndex; 
+    addChoreToSelectionList(choreList.options[choreToRemove].text);
+    choreList.options[choreToRemove].remove();
+    
+
   }
 
   function choresIntoArray(evt) {
@@ -298,8 +318,12 @@ function startCreateChoreGroup() {
   function choreOptions() {
     // Reveal Chore Options Section 
     document.getElementById("choreOptionsSection").classList.remove("hide");
+    if(choreArray.length == 0){
+        backToChoreSelection();
+    }
     createChoreForms();
     choreOptionEvents();
+
     
   }
 
@@ -374,7 +398,7 @@ function startCreateChoreGroup() {
       let choreAssignee = document.getElementById("choreAssign" + x);
       let choreExemptee = document.getElementById("choreExempt" + x);
       let dueDate = document.getElementById("choreDate" + x);
-      if(dueDate.value === ""){
+      if(dueDate.value == ""){
           allGood = false;
           if(!dueDate.classList.contains("highlightRed")){
             dueDate.classList.toggle("highlightRed");
@@ -384,8 +408,8 @@ function startCreateChoreGroup() {
           dueDate.classList.toggle("highlightRed");
         }
       }
-      if(choreExemptee.value !== "null"){
-        if(choreAssignee.value === choreExemptee.value){
+      if(choreExemptee.value != "null"){
+        if(choreAssignee.value == choreExemptee.value){
           allGood = false;
           if(!choreAssignee.classList.contains("highlightRed")){
             choreAssignee.classList.toggle("highlightRed");
@@ -446,7 +470,7 @@ function startCreateChoreGroup() {
       chore.assigned = document.getElementById("choreAssign" + i).value;
       chore.exempt = document.getElementById("choreExempt" + i).value;
       // actors manully assigned
-      if(chore.assigned !== "random"){
+      if(chore.assigned != "random"){
         // get index of assigned actor 
         let index = chore.assigned.substr(5);
         chore.assigned = actorsArray[index].name;
@@ -455,12 +479,13 @@ function startCreateChoreGroup() {
         //console.log("assignment -- " + actorsArray[index].name + " " + actorsArray[index].chores);
       }else{
         // chore assigned randomly and has exemption 
-        if(chore.exempt !== "null"){
+        if(chore.exempt != "null"){
           // get index of exemption and send to randomlyAssignChore
           let exemptIndex = chore.exempt.substr(5);
           let index2 = randomlyAssignChore(exemptIndex);
           chore.assigned = actorsArray[index2].name;
           chore.exempt = actorsArray[exemptIndex].name;
+          //console.log(chore.exempt);
           actorsArray[index2].chores += 1;
           //console.log("assignment -- " + actorsArray[index2].name + " " + actorsArray[index2].chores);
         }else{
@@ -477,10 +502,10 @@ function startCreateChoreGroup() {
 
   function randomlyAssignChore(exemption) {
     var randomNum;
-    if(exemption !== 666){
+    if(exemption != 666){
       do{
         randomNum = Math.floor(Math.random() * (numberOfActors));
-      }while(randomNum === exemption);
+      }while(randomNum == exemption);
       return randomNum;
     }else{
       randomNum = Math.floor(Math.random() * (numberOfActors));
@@ -540,10 +565,8 @@ function startCreateChoreGroup() {
         }
         if(min < max){
           for(let y = 0; y < choreArray.length; y++){
-            if((actorsArray[maxIndex].name === choreArray[y].assigned) &&
-               (choreArray[y].manuallyAssigned === false) &&
-               (choreArray[y].exempt !== actorsArray[minIndex].name))
-            {
+            if(choreArray[y].exempt !== actorsArray[minIndex].name && choreArray[y].manuallyAssigned === false && actorsArray[maxIndex].name === choreArray[y].assigned){
+              //console.log(choreArray[y].exempt + " " + actorsArray[minIndex].name);
               choreArray[y].assigned = actorsArray[minIndex].name;
               actorsArray[minIndex].chores += 1;
               actorsArray[maxIndex].chores -= 1;
@@ -654,7 +677,7 @@ function startCreateChoreGroup() {
     var choresToSend = {};
     var email = document.getElementById("emailInputForAssignedChoresListForm").value;
     choresToSend = "email : " + email + " , ";
-     for(var x = 0; x < actorsArray.length; x++){
+    for(var x = 0; x < actorsArray.length; x++){
       if(actorsArray[x].chores > 0){
         if(x > 0){
           choresToSend += " , " + actorsArray[x].name + " : ";
@@ -664,7 +687,7 @@ function startCreateChoreGroup() {
         }
         for(var i = 0; i < choreArray.length; i++){
           if(actorsArray[x].name == choreArray[i].assigned){
-            choresToSend += choreArray[i].name + " " + choreArray[i].date + " ";
+            choresToSend += choreArray[i].name + " " + choreArray[i].date + " | ";
           }
         }
       }
@@ -679,9 +702,10 @@ function startCreateChoreGroup() {
         }
       }
     }
+    choresToSend += " , groupName : " + nameOfGroup + " ";
     
     var emailJson = JSON.stringify(choresToSend);
-    console.log(emailJson);
+    //console.log(emailJson);
     //window.location = "folder/pythonscriptname.py?x=" 
     
     //window.open(www.thankyouorsomeshit.com)
