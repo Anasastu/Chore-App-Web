@@ -103,16 +103,16 @@
 	-->
 	<div id="choreSelection" class="hide">
 		<h4 id="choreSelectionTitle"></h4>
-		<p>Please select all the chores that need to get done below.<br>If you dont find them in the list, write them in!</p>
+		<p>Click a chore to add it to your list.<br>Or write it in the box below!</p>
 		<form id="choreSelectionForm" class="">
 			<select id="choreSelectionList" name="" size="7">
-			  	<option value='choreName'>Dust/Wipe surfaces</option>
-				<option value='choreName'>Dust/Clean Windows</option>
+			  	<option value='choreName'>Wipe surfaces</option>
+				<option value='choreName'>Clean Windows</option>
 				<option value='choreName'>Vacuum Floor</option>
 				<option value='choreName'>Sweep Floor</option>
 				<option value='choreName'>Mop Floor</option>
 				<option value='choreName'>Wash Dishes</option>
-				<option value='choreName'>Prepare/Cook Meal</option>
+				<option value='choreName'>Cook Meal</option>
 				<option value='choreName'>Grocery Shopping</option>
 				<option value='choreName'>Do Laundry</option>
 				<option value='choreName'>Wash Bedding</option>
@@ -126,16 +126,16 @@
 				<option value='choreName'>Clean Fridge</option>
 				<option value='choreName'>Clean Oven</option>
 				<option value='choreName'>Clean Stove</option>
-				<option value='choreName'>Clean/Organize Pantry</option>
+				<option value='choreName'>Organize Pantry</option>
 				<option value='choreName'>Water Indoor Plants</option>
 				<option value='choreName'>Water Garden Plants</option>
 				<option value='choreName'>Take Out Trash</option>
-				<option value='choreName'>Walk Dog(s)</option>
-				<option value='choreName'>Feed Dog(s)</option>
-				<option value='choreName'>Feed Cat(s)</option>
-				<option value='choreName'>Feed Fish(es)</option>
-				<option value='choreName'>Clean/Change Cat Litter</option>
-				<option value='choreName'>Clean Fish Tank(s)</option>
+				<option value='choreName'>Walk Dog</option>
+				<option value='choreName'>Feed Dog</option>
+				<option value='choreName'>Feed Cat</option>
+				<option value='choreName'>Feed Fish</option>
+				<option value='choreName'>Change Cat Litter</option>
+				<option value='choreName'>Clean Fish Tank</option>
 				<option value='choreName'>Clean Driveway</option>
 				<option value='choreName'>Clean Deck</option>
 				<option value='choreName'>Pull Weed</option>
@@ -157,10 +157,10 @@
 			<!-- Chores that are double clicked from the list or 
 					are added via the custom chore add go here!
 			-->
-			<h5>Chores You Selected Go Here!</h5>
+			<h5>Chores You Selected Go Here!<br>Click to remove a chore</h5>
 			<div id="preChoreListSection">
-				<form id="preChoreListForm">
-					<select id="userSelectedChores" name="" size="">
+				<form id="preChoreListForm" class="">
+					<select id="userSelectedChores" name="" size="0" class="hide">
 					</select>
 					<input type='reset' value='Back'>
 					<input type="submit" value="Continue">
