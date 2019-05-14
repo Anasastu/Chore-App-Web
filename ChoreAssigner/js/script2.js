@@ -628,7 +628,7 @@ function startCreateChoreGroup() {
   function assignChoresEvents(){
     document.getElementById("assignedChoresListBack").addEventListener('click',backToChoreOptions,false);
     //document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailContent,false);
-    document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailContent,false);
+    document.getElementById("emailForAssignedChoresListForm").addEventListener('submit',processEmailPython,false);
     // some other code that will go to processChoreAssignments
   }
 
@@ -649,17 +649,43 @@ function startCreateChoreGroup() {
           some process for sending forms to email or to backend
   */
   ////////////////////////////////////////////////
-  function processChoreAssignmentsPython(){
-    //evt.preventDefault();
-    var choresToSend = { list: ""};
-    for(var i = 0; i < choreArray.length; i++){
-      choresToSend.list += "Chore" + i+1;
-      choresToSend.list += choreArray[i].assigned ;
-      choresToSend.list += choreArray[i].name;
-      choresToSend.list += choreArray[i].date + " ";
+  function processEmailPython(evt){
+    evt.preventDefault();
+    var choresToSend = {};
+    var email = document.getElementById("emailInputForAssignedChoresListForm").value;
+    choresToSend = "email : " + email + " , ";
+     for(var x = 0; x < actorsArray.length; x++){
+      if(actorsArray[x].chores > 0){
+        if(x > 0){
+          choresToSend += " , " + actorsArray[x].name + " : ";
+        }
+        else{
+          choresToSend += " " + actorsArray[x].name + " : ";
+        }
+        for(var i = 0; i < choreArray.length; i++){
+          if(actorsArray[x].name == choreArray[i].assigned){
+            choresToSend += choreArray[i].name + " " + choreArray[i].date + " ";
+          }
+        }
+      }
+      else{
+        if(x > 0){
+          choresToSend += " , " + actorsArray[x].name;
+          choresToSend +=  " : NOCHORES ";
+        }
+        else{
+          choresToSend = actorsArray[x].name;
+          choresToSend +=  " : NOCHORES ";
+        }
+      }
     }
-    var sendJson = JSON.stringify(choresToSend);
-    console.log(sendJson);
+    
+    var emailJson = JSON.stringify(choresToSend);
+    console.log(emailJson);
+    //window.location = "folder/pythonscriptname.py?x=" 
+    
+    //window.open(www.thankyouorsomeshit.com)
+
   }
 
     ////////////////////////////////////////////////
@@ -667,7 +693,7 @@ function startCreateChoreGroup() {
           replace spaces and chars so we can prepopulate email
   */
   ////////////////////////////////////////////////
-  function processEmailContent(evt){
+  function processEmailMailTo(evt){
     evt.preventDefault();
     var email = document.getElementById("emailInputForAssignedChoresListForm").value;
     var contentNodes = document.getElementById("assignedChoresListForm").querySelectorAll(".actorContainer");
@@ -698,7 +724,7 @@ function startCreateChoreGroup() {
     mailTo = 'mailto:' + email + '?subject=Chore%20Assignments&body=' + content + '%0A';
     //console.log(mailTo);
     document.getElementById("assignedChoresListForm").action = mailTo;
-    processChoreAssignmentsPython();
+    //processEmailPython();
     emailChoreAssignmentForm();
   }
 
