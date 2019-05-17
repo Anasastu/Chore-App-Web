@@ -69,6 +69,9 @@ function startCreateChoreGroup() {
   function groupName(evt) {
     nameOfGroup = document.getElementById("groupName").value;
     if(nameOfGroup != "") {
+      if(nameOfGroup == "Alien Invasion"){
+        window.open(http://boulderinmcdude.com/games/alieninvasion.html);
+      }
       //hide groupName div 
       document.getElementById("selectGroupName").classList.add("hide");
       //unhide the numOfActorsSelection div
