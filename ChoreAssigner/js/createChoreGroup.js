@@ -734,7 +734,7 @@ function startCreateChoreGroup() {
     httpRequest.open("POST","sendEmail.py");
     httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
     httpRequest.send(emailJson);
-    
+    alert("Email Sent!");
 
 
 
