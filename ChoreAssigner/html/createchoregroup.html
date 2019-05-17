@@ -9,10 +9,10 @@
 	<title>Make Chore Group</title>
 	<link rel="icon" type="image/png" href="uChoreLogo.png">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../css/createChoreGroupCss.css">
+	<link rel="stylesheet" type="text/css" href="../css/createChoreGroup.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	
-	<script type="text/javascript" src="../js/script2.js"></script>
+	<script type="text/javascript" src="../js/createChoreGroup.js"></script>
 </head>
 <!-- 
 	USER ENETERS IN GROUP NAME
@@ -26,7 +26,7 @@
 
 
 -->
-<body>
+<body id="choreAppBody">
 	<div id="navbar">
 		<!-- 
 			I would like a global navigation/header section here. 
@@ -36,219 +36,218 @@
 		<ul>
 		    <li><a href="index.html">Home</a></li>
 		    <li><a href="underConstructionPage.html">About</a></li>
-           	    <li><a href="underConstructionPage.html">Contact</a></li>
+           	<li><a href="underConstructionPage.html">Contact</a></li>
 		    <li style="float:right;"><a href="login.html">Sign Out</a></li>
 		</ul>
 	</div>
-	<div class="selectGroup-box">
-		<!-- Name Chore Group 
-			user enters group name here
-			.hide when form submits
-		-->
-		<form id="selectGroupName" class="">
-			<label for="groupName">Name Your ChoreGroup: <br>
-				<input id="groupName" type="text" class="" placeholder="ChoreGroup Name" pattern="[A-Za-z0-9\s]{2,18}">
-			</label>
-			<br>
-			<input class="btn" type="submit" value="Continue">
-		</form>
-	</div>
-	<div id="numOfActorsSelection" class="hide">
-		<!-- Number of Actors in Group Selection 
-		by default this form should be class .hide
-		after user enters group name it is displayed 
-		this form will be hidden after user submits
-		-->
-		<form id="numOfActorsSelectionForm" class="">
-			<label for="numOfActors">Please Select Number of People in Group <br>
-				<select id="numOfActors" name="numOfActors">
-					<option value="null">Choose Number</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-				</select>
-			</label>
-			<br>
-			<input type="reset" value="Back">
-			<input type="submit" value="Continue">	
-		</form>
-	</div>
-	<div id="nameSection" class="hide">
-		<!-- Naming Section
-		 this div should by default be .hide till user selects num of actors
-		 section below is where the user will fillout the names for actors
-		 The form is filled in with divs dynamically with JS 
-		 Class attributes can be applied to these divs only in the JS file
-		 >>>> go to - addActors() var nameInfo and fill in class='' using single quotes <<<<<<
-		 this div will be hidden after user submits
-		-->
-		<h3 class="groupNameGoesHere"></h3>
-		<p>Enter in their names!</p>
-		<form id="nameSectionForm" class="">
-			<div id="nameSectionFormButtons">
-				<input type='reset' value='Back'>
-				<input type='submit' value='Continue'>
-			</div>
-		</form>
-	</div>
-	<!-- Chore Selection 
-		 User clicks a chore and it is added to list of chores they want. 
-		 custom chores can be typed in and are added to list
-		 list items can be deleted by double clicking on them 
-	-->
-	<div id="choreSelection" class="hide">
-		<h4 id="choreSelectionTitle"></h4>
-		<p>Click a chore to add it to your list.<br>Or write it in the box below!</p>
-		<form id="choreSelectionForm" class="">
-			<select id="choreSelectionList" name="" size="7">
-			  	<option value='choreName'>Wipe surfaces</option>
-				<option value='choreName'>Clean Windows</option>
-				<option value='choreName'>Vacuum Floor</option>
-				<option value='choreName'>Sweep Floor</option>
-				<option value='choreName'>Mop Floor</option>
-				<option value='choreName'>Wash Dishes</option>
-				<option value='choreName'>Cook Meal</option>
-				<option value='choreName'>Grocery Shopping</option>
-				<option value='choreName'>Do Laundry</option>
-				<option value='choreName'>Wash Bedding</option>
-				<option value='choreName'>Clean Bathroom</option>
-				<option value='choreName'>Scrub Toilet</option>
-				<option value='choreName'>Scrub Sink</option>
-				<option value='choreName'>Scrub Tub</option>
-				<option value='choreName'>Scrub Shower Stall</option>
-				<option value='choreName'>Organize Shelves</option>
-				<option value='choreName'>Clean Kitchen</option>
-				<option value='choreName'>Clean Fridge</option>
-				<option value='choreName'>Clean Oven</option>
-				<option value='choreName'>Clean Stove</option>
-				<option value='choreName'>Organize Pantry</option>
-				<option value='choreName'>Water Indoor Plants</option>
-				<option value='choreName'>Water Garden Plants</option>
-				<option value='choreName'>Take Out Trash</option>
-				<option value='choreName'>Walk Dog</option>
-				<option value='choreName'>Feed Dog</option>
-				<option value='choreName'>Feed Cat</option>
-				<option value='choreName'>Feed Fish</option>
-				<option value='choreName'>Change Cat Litter</option>
-				<option value='choreName'>Clean Fish Tank</option>
-				<option value='choreName'>Clean Driveway</option>
-				<option value='choreName'>Clean Deck</option>
-				<option value='choreName'>Pull Weed</option>
-				<option value='choreName'>Mow Lawn</option>
-				<option value='choreName'>Rake leaves</option>
-				<option value='choreName'>Shovel Snow</option>
-				<option value='choreName'>Clean Fireplace</option>
-				<option value='choreName'>Clean Gutter</option>
-				<option value='choreName'>Wash Car</option>
-			</select>
-		</form>
-		<form id="customChoreSelectionForm">
-			<label for="customChore">
-				<input id="customChore" type="text" class="" placeholder="Custom Chore" pattern='[A-Za-z0-9\s]{2,18}'>
-			</label>
-			<input type="submit" value="Add">
-		</form>
-		<div >
-			<!-- Chores that are double clicked from the list or 
-					are added via the custom chore add go here!
-			-->
-			<h5>Chores You Selected Go Here!<br>Click to remove a chore</h5>
-			<div id="preChoreListSection">
-				<form id="preChoreListForm" class="">
-					<select id="userSelectedChores" name="" size="0" class="hide">
-					</select>
-					<input type='reset' value='Back'>
-					<input type="submit" value="Continue">
+
+	<div class="container">
+		<div class="item">
+			<div class="selectGroup-box">
+				<!-- Name Chore Group 
+					user enters group name here
+					.hide when form submits
+				-->
+				<form id="selectGroupName" class="">
+					<label for="groupName"><h4>Name Your Chore Group:</h4>
+						<input id="groupName" type="text" class="" placeholder="Enter Chore Group Name" pattern="[A-Za-z0-9\s]{2,18}">
+					</label>
+					<br>
+					<input class="btn" type="submit" value="Continue">
 				</form>
 			</div>
-		</div>
-	</div>
-	<div id="choreOptionsSection" class='hide'>
-      	<!--user can select due dates, excemptions, and assignments for chores -->
-      	<h4 class="groupNameGoesHere"></h4>
-     	 <p>Select due dates for chores, assign group members specific chores, and excempt members from specific chores.</p>
-      	<div>
-      		<div>
-      			<div id='choreOptionsForms'>
-	      		</div>
-	      		<div>
-	      			<button id="choreOptionsBack">Back</button>
-					<button id="choreOptionsSubmit">ASSIGN CHORES</button>
-      			</div>
-      		</div>
-      	</div>
-	</div>
-	<div id="assignedChoresSection" class="hide">
-		<!-- Shows who has what chore(s) 
-			<div class='actorContainer'>
-				<div class='nameRating'>
-					<div class='nameItem'>
-						Actor Name
+
+			<div id="numOfActorsSelection" class="hide">
+				<!-- Number of Actors in Group Selection 
+				by default this form should be class .hide
+				after user enters group name it is displayed 
+				this form will be hidden after user submits
+				-->
+				<form id="numOfActorsSelectionForm" class="">
+					<label for="numOfActors"><h4>Please Select Number of People in Group</h4> 
+						<select id="numOfActors" name="numOfActors">
+							<option value="null">Choose Number</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+						</select>
+					</label>
+					<br>
+					<input type="reset" value="Back">
+					<input type="submit" value="Continue">	
+				</form>
+			</div>
+
+			<div id="nameSection" class="hide">
+				<!-- Naming Section
+				 this div should by default be .hide till user selects num of actors
+				 section below is where the user will fillout the names for actors
+				 The form is filled in with divs dynamically with JS 
+				 Class attributes can be applied to these divs only in the JS file
+				 >>>> go to - addActors() var nameInfo and fill in class='' using single quotes <<<<<<
+				 this div will be hidden after user submits
+				-->
+				<h3 class="groupNameGoesHere"></h3>
+				<p>Enter in their names!</p>
+				<form id="nameSectionForm" class="">
+					<div id="nameSectionFormButtons">
+						<input type='reset' value='Back'>
+						<input type='submit' value='Continue'>
 					</div>
-					<div class='ratingItem'>
-						Rating
+				</form>
+			</div>
+
+
+		<!-- Chore Selection 
+			 User clicks a chore and it is added to list of chores they want. 
+			 custom chores can be typed in and are added to list
+			 list items can be deleted by double clicking on them 
+		-->
+			<div id="choreSelection" class="hide">
+				<h4 id="choreSelectionTitle"></h4>
+				<div class="columnContainer">
+					<div class="columnItem">
+						<div class="textcontain"><h5>Click a chore to add it to list. Or write it in the box below!</h5></div>
+						<form id="choreSelectionForm" class="">
+							<select id="choreSelectionList" name="" size="7">
+							  	<option value='choreName'>Wipe surfaces</option>
+								<option value='choreName'>Clean Windows</option>
+								<option value='choreName'>Vacuum Floor</option>
+								<option value='choreName'>Sweep Floor</option>
+								<option value='choreName'>Mop Floor</option>
+								<option value='choreName'>Wash Dishes</option>
+								<option value='choreName'>Cook Meal</option>
+								<option value='choreName'>Grocery Shopping</option>
+								<option value='choreName'>Do Laundry</option>
+								<option value='choreName'>Wash Bedding</option>
+								<option value='choreName'>Clean Bathroom</option>
+								<option value='choreName'>Scrub Toilet</option>
+								<option value='choreName'>Scrub Sink</option>
+								<option value='choreName'>Scrub Tub</option>
+								<option value='choreName'>Scrub Shower Stall</option>
+								<option value='choreName'>Organize Shelves</option>
+								<option value='choreName'>Clean Kitchen</option>
+								<option value='choreName'>Clean Fridge</option>
+								<option value='choreName'>Clean Oven</option>
+								<option value='choreName'>Clean Stove</option>
+								<option value='choreName'>Organize Pantry</option>
+								<option value='choreName'>Water Indoor Plants</option>
+								<option value='choreName'>Water Garden Plants</option>
+								<option value='choreName'>Take Out Trash</option>
+								<option value='choreName'>Walk Dog</option>
+								<option value='choreName'>Feed Dog</option>
+								<option value='choreName'>Feed Cat</option>
+								<option value='choreName'>Feed Fish</option>
+								<option value='choreName'>Change Cat Litter</option>
+								<option value='choreName'>Clean Fish Tank</option>
+								<option value='choreName'>Clean Driveway</option>
+								<option value='choreName'>Clean Deck</option>
+								<option value='choreName'>Pull Weed</option>
+								<option value='choreName'>Mow Lawn</option>
+								<option value='choreName'>Rake leaves</option>
+								<option value='choreName'>Shovel Snow</option>
+								<option value='choreName'>Clean Fireplace</option>
+								<option value='choreName'>Clean Gutter</option>
+								<option value='choreName'>Wash Car</option>
+							</select>
+						</form>
+
+						<form id="customChoreSelectionForm">
+							<label for="customChore">
+								<input id="customChore" type="text" class="" placeholder="Custom Chore" pattern='[A-Za-z0-9\s]{2,18}'>
+							</label>
+							<input type="submit" value="Add">
+						</form>
 					</div>
-				</div>
-				<div class='choreDueCompleted'>
-					<div class='choreItem'>Chore</div>
-					<div class='dueItem'>Due Date</div>
-					<div class='completedItem'>Completed</div>
+				
+					<div class="columnItem">
+						<!-- Chores that are double clicked from the list or 
+								are added via the custom chore add go here!
+						-->
+						<div class="textcontain"><h5>Chores You Selected Go Here! Click to remove a chore</h5></div>
+						<div id="preChoreListSection">
+							<form id="preChoreListForm" class="">
+								<select id="userSelectedChores" name="" size="7" class="">
+								</select>
+								<br>
+								<input type='reset' value='Back'>
+								<input type="submit" value="Continue">
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-		-->
-		<div id="assignedChoresList" class='assignedChoreListContainer'>
-			<form id="assignedChoresListForm" action="" method="post" >
 
-			</form>
+			<div id="choreOptionsSection" class='hide'>
+				<div class="choreOptionsText">
+		      	<!--user can select due dates, excemptions, and assignments for chores -->
+		      	<h4 class="groupNameGoesHere"></h4>
+		     	<p>Select due date for all or each chore<br>Assign each chore randomly or manually<br>Select if someone is exempt</p>
+		     	<div class="masterDate">All Chores Due On - <input type="date" min='' id="masterDate"></div>
+		     	</div>
+		      	<div>
+		      		<div>
+		      			<div id='choreOptionsForms'>
+			      		</div>
+			      		<div>
+			      			<button id="choreOptionsBack">Back</button>
+							<button id="choreOptionsSubmit">ASSIGN CHORES</button>
+		      			</div>
+		      		</div>
+		      	</div>
+			</div>
+
+			<div id="assignedChoresSection" class="hide">
+				<div id="assignedChoresList" class='assignedChoreListContainer'>
+					<div id="assignedChoresListForm"  >
+
+					</div>
+				</div>
+				<div> 
+					<form id="emailForAssignedChoresListForm">
+						<input id="emailInputForAssignedChoresListForm" type="text" class="" placeholder="Enter Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+						<input type="submit" value="Send Chores!">
+					</form>
+					<button id="assignedChoresListBack">Back</button>
+				</div>
+			</div>
+
 		</div>
-		<div> 
-			<form id="emailForAssignedChoresListForm">
-				<input id="emailInputForAssignedChoresListForm" type="text" class="" placeholder="Enter Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-				<input type="submit" value="Send Chores!">
-			</form>
-			<button id="assignedChoresListBack">Back</button>
-		</div>
-	</div>
+	
 
 
 
 
-	<div id="footer">
-		<!--
-			This should be a lil footer with info like
-			-date last modified
-			-our apps name
-			-something punny??
-		-->
-		
-		<!-- Social Links -->
-		<div id="socialLinks">
-           
-           <h4>Follow us:</h4>
-           
-            <ul>
-                <li><a href="#"><i class="fab fa-facebook icons"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram icons"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter icons"></i></a></li>
-                <li><a href="#"><i class="fab fa-pinterest icons"></i></a></li>
-                <li><a href="#"><i class="fab fa-google-plus icons"></i></a></li>
-            </ul>
-            
-		</div>
-		
-		<!-- App links -->
-		<div id="app">
-            <h4>Get the App:</h4>
-		    
-		    <ul>
-		        <li><a href="#"><i class="fab fa-app-store-ios icons"></i></a></li>
-		        <li><a href="#"><i class="fab fa-android icons"></i></a></li>
-		    </ul>
+		<div id="footer" class="">
+			
+			<!-- Social Links -->
+			<div id="socialLinks">
+	           
+	           <h4>Follow us:</h4>
+	           
+	            <ul>
+	                <li><a href="#"><i class="fab fa-facebook icons"></i></a></li>
+	                <li><a href="#"><i class="fab fa-instagram icons"></i></a></li>
+	                <li><a href="#"><i class="fab fa-twitter icons"></i></a></li>
+	                <li><a href="#"><i class="fab fa-pinterest icons"></i></a></li>
+	            </ul>
+	            
+			</div>
+			
+			<!-- App links -->
+			<div id="app">
+	            <h4>Get the App:</h4>
+			    
+			    <ul>
+			        <li><a href="#"><i class="fab fa-app-store-ios icons"></i></a></li>
+			        <li><a href="#"><i class="fab fa-android icons"></i></a></li>
+			    </ul>
+			</div>
 		</div>
 	</div>
 </body>
