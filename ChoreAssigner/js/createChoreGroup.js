@@ -731,7 +731,7 @@ function startCreateChoreGroup() {
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     */
     var httpRequest = new XMLHttpRequest();
-    httpRequest.open("POST","../../sendEmail.py");
+    httpRequest.open("POST","../sendEmail.py");
     httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
     httpRequest.send(emailJson);
     
