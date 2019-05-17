@@ -1,0 +1,700 @@
+/* -version 2.2 - Dionte 5/12/2019 */
+
+#choreAppBody {
+   height: 100vh;
+   width: auto;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.3)),url("https://www.bannerhealth.com/healthcareblog/-/media/images/project/blog/images/household-products.ashx?w=1170&hash=0432392A9AB20D4CB1F23F4B4A00CB5CF7ADA0E7");
+    background-size: cover;
+    background-color: black;
+    background-repeat: repeat;
+    font-family: Arial;
+    font-weight: bold;s
+    margin-top: 60px;
+    padding-bottom: 4em;
+    
+    margin-bottom: 40px;
+}
+
+.highlightRed {
+    background-color: #FF0000;
+}
+
+.hide {
+	display: none;
+}
+
+.reveal {
+	display: block;
+}
+
+
+#navbar {
+    background-image: linear-gradient(rgb(0, 0, 0),rgba(1, 1, 1, 0.25)),url("https://www.bannerhealth.com/healthcareblog/-/media/images/project/blog/images/household-products.ashx?w=1170&hash=0432392A9AB20D4CB1F23F4B4A00CB5CF7ADA0E7");
+    
+   
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    overflow: hidden;
+
+    box-shadow: 0 0 25px 0 black;
+
+
+    transition: top 0.4s;
+}
+
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+}
+
+#navbar li {
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar a:hover {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    color: red;
+}
+
+.container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    padding: 200px 5px;
+    border: 10px;
+    margin: 10px;
+   
+
+}
+
+.item{
+
+    margin: 0px auto;
+    text-align: center;
+    background: rgba(0, 153, 224, 0.9);
+    width: auto;
+    height: contain;
+    box-shadow: 5px 10px 16px -2px rgba(0,0,0,0.5);
+
+    line-height: 1.3;
+
+    padding: 20px;
+    border: 15px;
+    border-radius: 10px;
+    color: white;
+
+
+}
+
+.columnContainer{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.columnItem{
+    padding: 5px;
+}
+
+/* Set up the button */
+.btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: 3px solid #000000;
+    font-weight: bold;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Set up the input field */
+.selectGroup-box input[type="text"] {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+    box-shadow: 5px 10px 10px #CD5C5C;
+    
+}
+
+#numOfActors {
+    width: 200px;
+    height: 40px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+}
+
+/* Set up the input field */
+#numOfActorsSelectionForm input[type="submit"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Change the color of the button when
+   mouse is hovering */
+#numOfActorsSelectionForm input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Set up the back button */
+#numOfActorsSelectionForm input[type="reset"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Change the color of the button when mouse is hovering */
+#numOfActorsSelectionForm input[type="reset"]:hover {
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #FFFFFF;
+    background-color: #B71C1C;
+}
+
+/* Set up the nameSection input fields */
+#nameSection input[type="text"] {
+    width: 200px;
+    height: 15px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+/* Set up the nameSection button */
+#nameSection input[type="submit"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Change the color of the button when hovering over it with your mouse */
+#nameSection input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Set up the nameSection back button */
+#nameSection input[type="reset"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Change the color of the button when hovering over it with your mouse */
+#nameSection input[type="reset"]:hover {
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #FFFFFF;
+    background-color: #B71C1C;
+}
+
+
+#choreSelectionTitle{
+    text-decoration: underline;
+    color: white;
+    text-align: center;
+
+    -webkit-text-stroke: .5px black;
+   
+   text-shadow:
+       1px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+    
+}
+
+#choreSelectionForm {
+    margin-bottom: 5px;
+    padding-right: 10px;
+}
+
+#preChoreListForm {
+
+}
+
+/* Set up a dotted border around the choreSelectionForm */
+#choreSelectionForm select {
+    width: 200px;
+    border: 3px dotted #CD5C5C;
+    margin-bottom: 10px;
+}
+
+/* Set up width for user selected chores */
+#preChoreListForm select {
+    width: 200px;
+    border: 3px solid #CD5C5C;
+    margin-bottom: 10px;
+}
+
+/* Set up the width of the choreSelection input fields */
+#choreSelection input[type="text"] {
+    width: 150px;
+}
+
+#customChoreSelectionForm{
+    margin-bottom: 20px;
+}
+
+/* Add button */
+#customChoreSelectionForm input[type="submit"] {
+    border-radius: 20px;
+    border: 2px solid #FF5722;
+    background-color: #D3D3D3;
+}
+
+#customChoreSelectionForm input[type="submit"]:hover {
+   background-color: #000000; 
+    color: #FF5722;
+    cursor: pointer;
+
+}
+
+/* Continue button */
+#preChoreListSection input[type="submit"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#preChoreListSection input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #7FFFD4;
+}
+
+/* Back button */
+#preChoreListSection input[type="reset"] {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #CD5C5C;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#preChoreListSection input[type="reset"]:hover {
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #FFFFFF;
+    background-color: #B71C1C;
+}
+
+.groupNameGoesHere {
+    text-decoration: underline;
+    color: white;
+    text-align: center;
+    -webkit-text-stroke: .5px black;
+   
+   text-shadow:
+       1px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+/* Set up choreOptionsSection */
+#choreOptionsSection {
+    padding: 10px 0px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.choreOptionsText{
+    text-align: left;
+    margin-left: 20px;
+}
+
+#choreOptionsForms {
+    margin-bottom: 10px;
+}
+
+.choreOption {
+    text-align: left;
+    margin: 20px;
+}
+
+/* Set up choreOptionsSubmit button */
+#choreOptionsSubmit {
+    margin-top: 10px;
+    height: 30px;
+    border: 3px solid #CD5C5C;
+    font-weight: bold;
+}
+
+#choreOptionsSubmit:hover {
+    cursor: pointer;
+    background-color: #00FF00;
+    color: #000;
+}
+
+/* Set up the back button */
+#choreOptionsBack {
+    margin-top: 10px;
+    height: 30px;
+    border: 3px solid #CD5C5C;
+    font-weight: bold;
+}
+
+#choreOptionsBack:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+#emailForAssignedChoresListForm input[type="text"] {
+    width: 150px;
+    height: 15px;
+    margin: 5px;
+    padding: 5px;
+
+}
+
+#emailForAssignedChoresListForm input[type="submit"] {
+    margin-top: 5px;
+    border-radius: 20px;
+    border: 2px solid #0000FF;
+    cursor: pointer;
+    background-color: #D3D3D3;
+    font-weight: bold;
+}
+
+#emailForAssignedChoresListForm input[type="submit"]:hover {
+    background-color: #000000;
+    color: #90EE90;
+}
+
+/* Setup the back button */
+#assignedChoresListBack {
+    margin-top: 5px;
+    border: 2px solid #B22222;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #D3D3D3;
+    font-weight: bold;
+}
+
+#assignedChoresListBack:hover {
+    background-color: #000000;
+    color: #FF0000;
+}
+
+.actorContainer {
+    width: auto;
+    height: contain;
+    background-color: rgba(250,250,250,0.5);
+    border-radius: 20px;
+    color: black;
+    margin: 10px;
+    padding: 10px; 
+}
+
+.choreItem{
+    text-align: left;
+   
+}
+
+.dueItem {
+    text-align: left;
+   
+}
+
+.choreDueCompleted{
+    border-top: 1px solid rgba(0,0,0,0.5);
+    padding-top: 5px;
+    color: black;
+    -webkit-text-stroke: .1px white;
+    text-shadow:
+       
+     -.5px -.5px 0 #FFF,  
+      .5px -.5px 0 #FFF,
+      -.5px .5px 0 #FFF,
+       .5px .5px 0 #FFF;
+}
+
+.choreOption{
+    width: auto;
+    height: contain;
+    background-color: rgba(250,250,250,0.7);
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px; 
+    color: black;
+    -webkit-text-stroke: .1px white;
+    text-shadow:
+       
+     -.5px -.5px 0 #FFF,  
+      .5px -.5px 0 #FFF,
+      -.5px .5px 0 #FFF,
+       .5px .5px 0 #FFF;
+}
+
+
+.textcontain{
+    width: 200px;
+    margin-top: 10px;
+}
+
+.nameItem{
+    letter-spacing: 2px;
+    -webkit-text-stroke: .2px black;
+   color: white;
+   text-shadow:
+       
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+h4{
+  -webkit-text-stroke: .5px black;
+   
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+p, h5, .masterDate{
+    -webkit-text-stroke: .2px black;
+   
+   text-shadow:
+       
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+
+
+*::selection {
+    text-shadow: 1px 1px 0 #ff0000;
+}
+
+h4::selection {
+    text-shadow: 1px 1px 0 #ff0000;
+}
+
+
+
+
+
+/* social media icons and app icons */
+.icons {
+    font-size: 20px;
+    color: lightyellow;
+}
+
+/* socail link header */
+#socialLinks h4 {
+    padding-left: 5px;
+    text-shadow: 1px 1px 0 #ff0000;
+}
+
+/* social links list */
+#socialLinks ul {
+    list-style-type: none;
+    margin-left: -40px;
+}
+
+#socialLinks li {
+    float: left;
+}
+
+#socialLinks a {
+    display: block;
+    padding: 8px;
+}
+
+#socialLinks a:hover {
+    cursor: pointer;
+    background-color: #607D8B;
+    border-radius: 10px;
+
+}
+
+/* Setup the foooter */
+#footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: contain;
+    margin-bottom: 0px;
+    color: lightyellow;
+    padding-top: 50px;
+
+    clear: both;
+    position: absolute;
+    margin-top: 100px;
+    z-index: -1;
+}
+
+/* Float the app div to the right */
+#app {
+    float: right;
+}
+
+/* fix the app header to align with the social link header */
+#app h4 {
+    margin-top: -40px;
+    margin-left: 35px;
+    text-shadow: 1px 1px 0 #ff0000;
+}
+
+/* Setup the app ul */
+#app ul {
+    list-style-type: none;
+}
+
+/* Float the app li to the right */
+#app li {
+    float: right;
+}
+
+#app a {
+    display: block;
+    padding: 8px;
+}
+
+#app a:hover {
+    cursor: pointer;
+    background-color: #607D8B;
+    border-radius: 10px;
+    
+}
+
+@media screen and (max-width: 320px) and (min-height: 568px) {
+    #footer {
+        display: none;
+    }
+    
+    #navbar ul {
+        width: 125%;
+    }
+}
+
+@media screen and (max-width: 360px) and (min-height: 640px) {
+    #footer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #socialLinks ul {
+        display: none;
+    }
+    
+    #app ul {
+        display: none;
+    }
+    
+    #socialLinks h4 {
+        display: none;
+    }
+    
+    #app h4 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 375px) and (min-height: 667px) {
+    #footer {
+        display: none;
+    }
+    
+    #navbar ul {
+        width: 109%;
+    }
+}
+
+
+
+@media screen and (max-width: 375px) and (min-height: 812px) {
+    #footer {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 414px) and (min-height: 736px) {
+    #footer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 411px) and (min-height: 731px) {
+    #socialLinks ul {
+        display: none;
+    }
+    
+    #app ul {
+        display: none;
+    }
+    
+    #socialLinks h4 {
+        display: none;
+    }
+    
+    #app h4 {
+        display: none;
+    }
+}
